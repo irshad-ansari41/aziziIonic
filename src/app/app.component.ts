@@ -5,26 +5,35 @@ import {SplashScreen} from '@ionic-native/splash-screen';
 
 import {HomePage} from '../pages/home/home';
 import {ListPage} from '../pages/list/list';
-import {PropertyPage} from '../pages/property/property';
+import {BrochuresPage} from '../pages/brochures/brochures';
+import {FloorplansPage} from '../pages/floorplans/floorplans';
+import {EventsPage} from '../pages/events/events';
+import {VideoGalleryPage} from '../pages/video-gallery//video-gallery';
+import {MortgageCalculatorPage} from '../pages/mortgage-calculator/mortgage-calculator'
 
 @Component({
     templateUrl: 'app.html'
 })
+
 export class MyApp {
     @ViewChild(Nav) nav: Nav;
 
     rootPage: any = HomePage;
 
-    pages: Array<{title: string, component: any}>;
+    pages: Array<{title: string, component: any,icon: string}>;
 
     constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
         this.initializeApp();
 
         // used for an example of ngFor and navigation
         this.pages = [
-            {title: 'Home', component: HomePage},
-            {title: 'List', component: ListPage},
-            {title: 'Property', component: PropertyPage},
+            {title: 'Projects', component: HomePage, icon:'home'},
+            {title: 'List', component: ListPage, icon:'list'},
+            {title: 'Brochures', component: BrochuresPage, icon:'document'},
+            {title: 'Floorplans', component: FloorplansPage, icon:'document'},
+            {title: 'Events', component: EventsPage, icon:'calendar',},
+            {title: 'Video Gallery', component: VideoGalleryPage, icon:'videocam',},
+            {title: 'Mortgage Calculator', component: MortgageCalculatorPage, icon:'calculator',}
         ];
 
     }

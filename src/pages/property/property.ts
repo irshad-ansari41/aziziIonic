@@ -1,5 +1,9 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, LoadingController} from 'ionic-angular';
+import {PropertyProvider} from '../../providers/property/property';
+
+import {HomePage} from '../home/home';
+
 
 /**
  * Generated class for the PropertyPage page.
@@ -15,15 +19,47 @@ import {IonicPage, NavController, NavParams} from 'ionic-angular';
 })
 export class PropertyPage {
 
-    public area: object = [];
+    public property: object = [];
 
-    constructor(public navCtrl: NavController, public navParams: NavParams) {
+    constructor(public navCtrl: NavController,
+        public navParams: NavParams,
+        private propertyProvider: PropertyProvider,
+        private loadingController: LoadingController, ) {
+    }
+
+    openHomePage() {
+        // Reset the content nav to have just this page
+        // we wouldn't want the back button to show in this scenario
+        this.navCtrl.push(HomePage);
     }
 
     ionViewDidLoad() {
-        this.area = this.navParams.get('area');
-        console.log(this.area);
+        this.property = this.navParams.get('property');
+        this.getProperty(this.property['value']['id']);
         console.log('ionViewDidLoad PropertyPage');
     }
+
+
+    getProperty(PropertyId: number) {
+        let allPropertyLoadingController = this.loadingController.create({
+            content: "getting your data from server"
+        });
+        allPropertyLoadingController.present();
+
+        let retrievedObject = localStorage.getItem('property_' + PropertyId);
+        if (typeof retrievedObject !== 'undefined' && retrievedObject !== null) {
+            this.property = JSON.parse(retrievedObject);
+            allPropertyLoadingController.dismiss();
+        } else {
+            this.propertyProvider.getProperty(PropertyId).subscribe((property) => {
+                this.property = property;
+                localStorage.setItem('property_' + PropertyId, JSON.stringify(property));
+                allPropertyLoadingController.dismiss();
+            });
+        }
+    }
+
+
+
 
 }

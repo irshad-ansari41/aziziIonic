@@ -10,11 +10,43 @@
             <ion-icon name="menu"></ion-icon>
         </button>
         <ion-title>Property</ion-title>
+        <ion-buttons end>
+            <button ion-button (click)="openHomePage()">
+            <ion-icon name="home"></ion-icon>
+        </button>
+        </ion-buttons>
     </ion-navbar>
-
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+
+    <ion-slides pager class="slides">
+        <ion-slide *ngFor="let image of property.images">
+            <div class="slide-background" [style.backgroundImage]="'url(' + image.medium + ')'">
+             <h2 class="slide-title">Slide 1</h2>
+            </div>
+        </ion-slide>
+    </ion-slides>
+
+
 
 </ion-content>
+
+<ion-footer>
+
+    <ion-toolbar>
+
+        <ion-grid class="grid">
+            <ion-row>
+                <button ion-button class="btn-footer"><ion-col><ion-icon name="document"></ion-icon> Brochure</ion-col></button>
+                <button ion-button class="btn-footer"><ion-col><ion-icon name="document"></ion-icon> Floorplan</ion-col></button>
+                <button ion-button class="btn-footer"><ion-col><ion-icon name="images"></ion-icon> Gallery</ion-col></button>
+                <button ion-button class="btn-footer"><ion-col><ion-icon name="videocam"></ion-icon> Video</ion-col></button>
+                <button ion-button class="btn-footer"><ion-col><ion-icon name="photos"></ion-icon> 360°</ion-col></button>
+                <button ion-button class="btn-footer"><ion-col><ion-icon name="map"></ion-icon> Map</ion-col></button>
+            </ion-row>
+        </ion-grid>
+
+    </ion-toolbar>
+</ion-footer>

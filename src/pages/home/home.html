@@ -4,14 +4,20 @@
             <ion-icon name="menu"></ion-icon>
         </button>
         <ion-title>Home</ion-title>
+        <ion-buttons end>
+            <button ion-button (click)="getAreas()">
+            <ion-icon name="home"></ion-icon>
+        </button>
+        </ion-buttons>
     </ion-navbar>
 </ion-header>
 
 <ion-content class="card-background-page">
-    <ion-card *ngFor="let area of areas.list|keys" (click)="openPropertyPage(area)">
+    <ion-card *ngFor="let area of areas.list|keys" (click)="openPropertiesPage(area)">
         <img [src]="area.value.image">
-        <div class="card-title">{{area.value.name}}</div>
-        <div class="card-subtitle">Dubai, UAE</div>
+        <div class="card-background">
+            <div class="card-title">{{area.value.name}}</div>
+            <div class="card-subtitle">Dubai, UAE</div>
+        </div>
     </ion-card>
-
 </ion-content>

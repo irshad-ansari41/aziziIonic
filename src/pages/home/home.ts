@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
-import {NavController} from 'ionic-angular';
+import {NavController, LoadingController} from 'ionic-angular';
 import {PropertyProvider} from '../../providers/property/property';
 
-import {PropertyPage} from '../property/property';
-
+import {PropertiesPage} from '../properties/properties';
+import {CommunityPage} from '../community/community';
 
 @Component({
     selector: 'page-home',
@@ -12,32 +12,44 @@ import {PropertyPage} from '../property/property';
 export class HomePage {
 
     public areas: object = [];
-    public propertyPage=PropertyPage;
 
-    constructor(public navCtrl: NavController, private propertyProvider: PropertyProvider) {
-        this.getArea();
-
+    constructor(public navCtrl: NavController, private propertyProvider: PropertyProvider, private loadingController: LoadingController, ) {
+        this.getAreas();
     }
 
-    getArea() {
-        this.propertyProvider.getProjects().subscribe((areas) => {
-            this.areas = areas;
-            console.log(areas);
+    getAreas() {
+        let allAreasLoadingController = this.loadingController.create({
+            content: "getting your data from server"
         });
+        allAreasLoadingController.present();
 
+        let retrievedObject = localStorage.getItem('areas');
+        if (typeof retrievedObject !== 'undefined' && retrievedObject !== null) {
+            this.areas = JSON.parse(retrievedObject);
+            allAreasLoadingController.dismiss();
+        } else {
+            this.propertyProvider.getAreas().subscribe((areas) => {
+                this.areas = areas;
+                localStorage.setItem('areas', JSON.stringify(areas));
+                allAreasLoadingController.dismiss();
+            });
+        }
     }
-    
-     openPropertyPage(area) {
+
+    openPropertiesPage(area: object) {
         // Reset the content nav to have just this page
         // we wouldn't want the back button to show in this scenario
-        this.navCtrl.push(PropertyPage,{area:area});
+        this.navCtrl.push(PropertiesPage, {area: area});
     }
-    
-    openCommunityPage() {
+
+    openCommunityPage(area: object) {
         // Reset the content nav to have just this page
         // we wouldn't want the back button to show in this scenario
-        this.navCtrl.push(PropertyPage);
+        this.navCtrl.push(CommunityPage, {area: area});
     }
+
+
+
 
 
 

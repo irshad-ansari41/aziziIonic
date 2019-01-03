@@ -18,8 +18,9 @@ export class KeysPipe implements PipeTransform {
         for (let key in value) {
             keys.push({key: key, value: value[key]});
         }
-        console.log(keys);
+        //console.log(keys);
         return keys;
     }
 
 }
+

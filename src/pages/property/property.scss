@@ -1,3 +1,35 @@
 page-property {
+    .grid{
+        padding:0;
+
+        .btn-footer{
+            padding:0;
+            text-transform: capitalize;
+        }
+    }
+
+    .slide-title {
+        position: absolute;
+        top: 80%;
+        font-size: 1.5em;
+        width: 100%;
+        font-weight: bold;
+        color: #fff;
+        background: rgba(0,0,0,0.4);
+    }
+
+    .slide-subtitle {
+        font-size: 1.0em;
+        position: absolute;
+        top: 52%;
+        width: 100%;
+        color: #fff;
+    }
+    .slide-background{
+        background-size: cover!important;
+        background-position: center center!important;
+        height: 100vh;
+    }
 
 }
+

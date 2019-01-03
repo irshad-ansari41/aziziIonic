@@ -1,11 +1,19 @@
-import { NgModule } from '@angular/core';
-import { CustomPipe } from './custom/custom';
-import { KeysPipe } from './keys/keys';
+import {NgModule} from '@angular/core';
+import {KeysPipe} from './keys/keys';
+
 @NgModule({
-	declarations: [CustomPipe,
-    KeysPipe],
-	imports: [],
-	exports: [CustomPipe,
-    KeysPipe]
+    declarations: [KeysPipe],
+    imports: [],
+    exports: [KeysPipe]
 })
-export class PipesModule {}
+
+export class PipesModule {
+
+//    static forRoot() {
+//        return {
+//            ngModule: PipesModule,
+//            providers: [],
+//        };
+//    }
+
+}

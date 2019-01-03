@@ -16,14 +16,31 @@ export class PropertyProvider {
         console.log('Hello PropertyProvider Provider');
     }
 
-    getProjects() {
+    getAreas() {
         return this.http.get(API + '/properties/areas');
-         console.log('Hello PropertyProvider Provider');
+    }
+
+    getCommunity(areaId: number) {
+        return this.http.get(API + '/properties/communities/' + areaId);
+    }
+
+    getProperties(areaId: number, communityId: number) {
+        return this.http.get(API + '/properties/' + areaId + '/' + communityId);
+    }
+
+    getProperty(propertyId: number) {
+        return this.http.get(API + '/properties/' + propertyId);
+    }
+
+    getBrouchures() {
+        return this.http.get(API + '/properties/brochures');
     }
     
-    getProperties() {
-        return this.http.get(API + '/properties/areas');
+    getFloorplans() {
+        return this.http.get(API + '/properties/floorplans');
     }
+
+
 
 
 }

@@ -1,6 +1,8 @@
 {
   "name": "aziziIonic",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "ionic-angular",
   "id": "e3aab21b"
 }
