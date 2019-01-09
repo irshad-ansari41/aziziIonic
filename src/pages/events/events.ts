@@ -1,9 +1,10 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams, LoadingController} from 'ionic-angular';
+import {IonicPage, Nav, NavController, NavParams, LoadingController} from 'ionic-angular';
 
 import {PropertyProvider} from '../../providers/property/property';
 
 import {HomePage} from '../home/home';
+import {MorePage} from '../more/more';
 
 /**
  * Generated class for the EventsPage page.
@@ -21,7 +22,9 @@ export class EventsPage {
 
     public events: object = [];
 
-    constructor(public navCtrl: NavController,
+    constructor(
+        public nav: Nav,
+        public navCtrl: NavController,
         public navParams: NavParams,
         private propertyProvider: PropertyProvider,
         private loadingController: LoadingController, ) {
@@ -33,10 +36,13 @@ export class EventsPage {
     }
 
     openHomePage() {
-        // Reset the content nav to have just this page
-        // we wouldn't want the back button to show in this scenario
-        this.navCtrl.push(HomePage);
+        this.nav.setRoot(HomePage);
     }
+
+    openMorePage() {
+        this.nav.setRoot(MorePage);
+    }
+
 
     getEvents() {
         let allEventsLoadingController = this.loadingController.create({

@@ -8,7 +8,8 @@ import {ListPage} from '../pages/list/list';
 import {BrochuresPage} from '../pages/brochures/brochures';
 import {FloorplansPage} from '../pages/floorplans/floorplans';
 import {EventsPage} from '../pages/events/events';
-import {VideoGalleryPage} from '../pages/video-gallery//video-gallery';
+import {VideoGalleryPage} from '../pages/video-gallery/video-gallery';
+import {EnquireNowPage} from '../pages/enquire-now/enquire-now';
 import {MortgageCalculatorPage} from '../pages/mortgage-calculator/mortgage-calculator'
 
 @Component({
@@ -33,6 +34,7 @@ export class MyApp {
             {title: 'Floorplans', component: FloorplansPage, icon:'document'},
             {title: 'Events', component: EventsPage, icon:'calendar',},
             {title: 'Video Gallery', component: VideoGalleryPage, icon:'videocam',},
+            {title: 'Enquire Now', component: EnquireNowPage, icon:'mail',},
             {title: 'Mortgage Calculator', component: MortgageCalculatorPage, icon:'calculator',}
         ];
 

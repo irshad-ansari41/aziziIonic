@@ -1,9 +1,10 @@
 import {Component} from '@angular/core';
-import {NavController, LoadingController} from 'ionic-angular';
+import {Nav, NavController, LoadingController} from 'ionic-angular';
 import {PropertyProvider} from '../../providers/property/property';
 
 import {PropertiesPage} from '../properties/properties';
 import {CommunityPage} from '../community/community';
+import {MorePage} from '../more/more';
 
 @Component({
     selector: 'page-home',
@@ -13,7 +14,7 @@ export class HomePage {
 
     public areas: object = [];
 
-    constructor(public navCtrl: NavController, private propertyProvider: PropertyProvider, private loadingController: LoadingController, ) {
+    constructor(public nav: Nav, public navCtrl: NavController, private propertyProvider: PropertyProvider, private loadingController: LoadingController, ) {
         this.getAreas();
     }
 
@@ -48,6 +49,13 @@ export class HomePage {
         this.navCtrl.push(CommunityPage, {area: area});
     }
 
+    openHomePage() {
+        this.nav.setRoot(HomePage);
+    }
+
+    openMorePage() {
+        this.nav.setRoot(MorePage);
+    }
 
 
 

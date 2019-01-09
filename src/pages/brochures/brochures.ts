@@ -1,11 +1,14 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams, Platform, LoadingController} from 'ionic-angular';
+import {IonicPage, Nav, NavController, NavParams, Platform, LoadingController} from 'ionic-angular';
 import {File} from '@ionic-native/file';
 import {DocumentViewer, DocumentViewerOptions} from '@ionic-native/document-viewer';
 import {FileTransfer} from '@ionic-native/file-transfer';
 
 import {PropertyProvider} from '../../providers/property/property';
 import {HomePage} from '../home/home';
+import {MorePage} from '../more/more';
+
+import {Constants} from '../../enum';
 /**
  * Generated class for the BrochuresPage page.
  *
@@ -28,6 +31,7 @@ export class BrochuresPage {
 
 
     constructor(
+        public nav: Nav,
         public navCtrl: NavController,
         public navParams: NavParams,
         private propertyProvider: PropertyProvider,
@@ -42,6 +46,13 @@ export class BrochuresPage {
     }
 
 
+    openHomePage() {
+        this.nav.setRoot(HomePage);
+    }
+
+    openMorePage() {
+        this.nav.setRoot(MorePage);
+    }
 
 
     ionViewDidLoad() {
@@ -49,17 +60,11 @@ export class BrochuresPage {
         console.log('ionViewDidLoad BrochuresPage');
     }
 
-    openHomePage() {
-        // Reset the content nav to have just this page
-        // we wouldn't want the back button to show in this scenario
-        this.navCtrl.push(HomePage);
-    }
-
 
     getBrouchures() {
 
         let allBrochuresLoadingController = this.loadingController.create({
-            content: "getting your data from server"
+            content: Constants.LoadingMsg
         });
         allBrochuresLoadingController.present();
 

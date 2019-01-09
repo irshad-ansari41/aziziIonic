@@ -1,6 +1,12 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {IonicPage, Nav, NavController, NavParams, LoadingController} from 'ionic-angular';
+import {DomSanitizer} from '@angular/platform-browser';
 
+import {PropertyProvider} from '../../providers/property/property';
+import {HomePage} from '../home/home';
+import {MorePage} from '../more/more';
+import {Constants} from '../../enum';
+ 
 /**
  * Generated class for the VideoGalleryPage page.
  *
@@ -10,16 +16,59 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-video-gallery',
-  templateUrl: 'video-gallery.html',
+    selector: 'page-video-gallery',
+    templateUrl: 'video-gallery.html',
 })
 export class VideoGalleryPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+    public pet: string = "Commercial";
+    public galleries: object = [];
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad VideoGalleryPage');
-  }
+    constructor(public navCtrl: NavController,
+        public navParams: NavParams,
+        public nav: Nav,
+        private propertyProvider: PropertyProvider,
+        private loadingController: LoadingController,
+        private sanitizer: DomSanitizer) {
+    }
+
+    openHomePage() {
+        this.nav.setRoot(HomePage);
+    }
+    
+    openMorePage() {
+        this.nav.setRoot(MorePage);
+    }
+
+
+    ionViewDidLoad() {
+        this.getVideoGalleries();
+        console.log('ionViewDidLoad VideoGalleryPage');
+    }
+
+    getVideoGalleries() {
+        let allGalleriesLoadingController = this.loadingController.create({
+            content: Constants.LoadingMsg
+        });
+        allGalleriesLoadingController.present();
+
+        let retrievedObject = localStorage.getItem('galleries');
+        if (typeof retrievedObject !== 'undefined' && retrievedObject !== null) {
+            this.galleries = JSON.parse(retrievedObject);
+            allGalleriesLoadingController.dismiss();
+        } else {
+            this.propertyProvider.getVideoGalleries().subscribe((floorplans) => {
+                this.galleries = floorplans;
+                console.log(this.galleries);
+                localStorage.setItem('galleries', JSON.stringify(floorplans));
+                allGalleriesLoadingController.dismiss();
+            });
+        }
+    }
+
+    generateVideoUrl(videoId: string) {
+        let url = this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/" + videoId + "?rel=0&loop=1&playlist=" + videoId + "&showinfo=0");
+        return url;
+    }
 
 }

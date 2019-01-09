@@ -10,6 +10,7 @@ import {Injectable} from '@angular/core';
 const API: string = "http://azizidevelopments.in/api/v1";
 
 @Injectable()
+
 export class PropertyProvider {
 
     constructor(public http: HttpClient) {
@@ -35,12 +36,24 @@ export class PropertyProvider {
     getBrouchures() {
         return this.http.get(API + '/properties/brochures');
     }
-    
+
     getFloorplans() {
         return this.http.get(API + '/properties/floorplans');
     }
 
+    getVideoGalleries() {
+        return this.http.get(API + '/video-galleries');
+    }
 
+    getImageGalleries() {
+        return this.http.get(API + '/image-galleries');
+    }
 
+    getCountries() {
+        return this.http.get('../assets/data/countries.json');
+    }
+    getAges() {
+        return this.http.get('../assets/data/ages.json');
+    }
 
 }

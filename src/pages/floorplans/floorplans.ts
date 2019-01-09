@@ -1,11 +1,12 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams, Platform, LoadingController} from 'ionic-angular';
+import {IonicPage, Nav,NavController, NavParams, Platform, LoadingController} from 'ionic-angular';
 import {File} from '@ionic-native/file';
 import {DocumentViewer, DocumentViewerOptions} from '@ionic-native/document-viewer';
 import {FileTransfer} from '@ionic-native/file-transfer';
 
 import {PropertyProvider} from '../../providers/property/property';
 import {HomePage} from '../home/home';
+import {MorePage} from '../more/more';
 
 /**
  * Generated class for the FloorplansPage page.
@@ -24,6 +25,7 @@ export class FloorplansPage {
     public floorplans: object = [];
 
     constructor(
+     public nav: Nav,
         public navCtrl: NavController,
         public navParams: NavParams,
         private propertyProvider: PropertyProvider,
@@ -31,10 +33,17 @@ export class FloorplansPage {
         private platform: Platform,
         private file: File,
         private transfer: FileTransfer,
-        private loadingController: LoadingController,
-    ) {
+        private loadingController: LoadingController, ) {
 
+    }
+    
+    
+    openHomePage() {
+        this.nav.setRoot(HomePage);
+    }
 
+    openMorePage() {
+        this.nav.setRoot(MorePage);
     }
 
     ionViewDidLoad() {
@@ -47,7 +56,7 @@ export class FloorplansPage {
             content: "getting your data from server"
         });
         allFloorplansLoadingController.present();
-        
+
         let retrievedObject = localStorage.getItem('floorplans');
         if (typeof retrievedObject !== 'undefined' && retrievedObject !== null) {
             this.floorplans = JSON.parse(retrievedObject);
@@ -61,7 +70,7 @@ export class FloorplansPage {
             });
         }
     }
-    
+
     openLocalPdf() {
         const options: DocumentViewerOptions = {
             title: 'My PDF'

@@ -1,18 +1,19 @@
-<ion-menu [content]="content">
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>Azizi</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-menu [content]="content" class="menu-panel">
+    
+    <ion-header class="bg-blue">
+        <ion-toolbar text-center>
+            <img src="http://azizidevelopments.in/uploads/2018/04/app-logo.png" alt="Azizi Developements" class="app-logo">
+        </ion-toolbar>
+    </ion-header>
 
-  <ion-content>
-    <ion-list>
-        <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-                <ion-icon [name]="p.icon"></ion-icon>
-        {{p.title}}
-      </button>
-    </ion-list>
-  </ion-content>
+    <ion-content>
+        <ion-list>
+            <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)" class="bg-blue text-white">
+                    <ion-icon [name]="p.icon"></ion-icon>
+                {{p.title}}
+            </button>
+        </ion-list>
+    </ion-content>
 
 </ion-menu>
 

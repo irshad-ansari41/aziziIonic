@@ -1,9 +1,11 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams, LoadingController} from 'ionic-angular';
+import {IonicPage, Nav, NavController, NavParams, LoadingController} from 'ionic-angular';
 import {PropertyProvider} from '../../providers/property/property';
 
 import {HomePage} from '../home/home';
+import {MorePage} from '../more/more';
 
+import {Constants} from '../../enum';
 
 /**
  * Generated class for the PropertyPage page.
@@ -21,17 +23,22 @@ export class PropertyPage {
 
     public property: object = [];
 
-    constructor(public navCtrl: NavController,
+    constructor(public nav: Nav,
+        public navCtrl: NavController,
         public navParams: NavParams,
         private propertyProvider: PropertyProvider,
         private loadingController: LoadingController, ) {
     }
 
+
     openHomePage() {
-        // Reset the content nav to have just this page
-        // we wouldn't want the back button to show in this scenario
-        this.navCtrl.push(HomePage);
+        this.nav.setRoot(HomePage);
     }
+
+    openMorePage() {
+        this.nav.setRoot(MorePage);
+    }
+
 
     ionViewDidLoad() {
         this.property = this.navParams.get('property');
@@ -42,7 +49,7 @@ export class PropertyPage {
 
     getProperty(PropertyId: number) {
         let allPropertyLoadingController = this.loadingController.create({
-            content: "getting your data from server"
+            content: Constants.LoadingMsg
         });
         allPropertyLoadingController.present();
 
