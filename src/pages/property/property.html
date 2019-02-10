@@ -9,7 +9,7 @@
         <button ion-button menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
-        <ion-title>Property</ion-title>
+        <ion-title>{{property.name}}</ion-title>
         <ion-buttons end>
             <button ion-button (click)="openHomePage()">
                     <ion-icon name="home"></ion-icon>
@@ -25,31 +25,21 @@
 <ion-content>
 
     <ion-slides pager class="slides">
-        <ion-slide *ngFor="let image of property.images">
-            <div class="slide-background" [style.backgroundImage]="'url(' + image.medium + ')'">
-             <h2 class="slide-title">Slide 1</h2>
-            </div>
+        <ion-slide *ngFor="let image of property.images" >
+            <img [src]="image" class="slide-image"/>
         </ion-slide>
     </ion-slides>
 
-
+    <ion-grid class="grid show-buttons">
+        <ion-row>
+            <button *ngIf="property.brochure" ion-button class="btn-footer" (click)="openPdf(property.brochure)"><ion-col><ion-icon name="document"></ion-icon> Brochure</ion-col></button>
+            <button *ngIf="property.floor_plan" ion-button class="btn-footer" (click)="openPdf(property.floor_plan)"><ion-col><ion-icon name="document"></ion-icon> Floorplan</ion-col></button>
+            <button  ion-button class="btn-footer"><ion-col><ion-icon name="images"></ion-icon> Gallery</ion-col></button>
+            <button *ngIf="property.video" ion-button class="btn-footer" (click)="openVideoPage(property.video)"><ion-col><ion-icon name="videocam"></ion-icon> Video</ion-col></button>
+            <button *ngIf="property.panorama" ion-button class="btn-footer" (click)="open360viewPage(property.panorama)"><ion-col><ion-icon name="photos"></ion-icon> 360°</ion-col></button>
+            <button *ngIf="property.latitude" ion-button class="btn-footer" (click)="openMapPage(property.latitude,property.longitude)"><ion-col><ion-icon name="map"></ion-icon> Map</ion-col></button>
+        </ion-row>
+    </ion-grid>
 
 </ion-content>
 
-<ion-footer>
-
-    <ion-toolbar>
-
-        <ion-grid class="grid">
-            <ion-row>
-                <button ion-button class="btn-footer"><ion-col><ion-icon name="document"></ion-icon> Brochure</ion-col></button>
-                <button ion-button class="btn-footer"><ion-col><ion-icon name="document"></ion-icon> Floorplan</ion-col></button>
-                <button ion-button class="btn-footer"><ion-col><ion-icon name="images"></ion-icon> Gallery</ion-col></button>
-                <button ion-button class="btn-footer"><ion-col><ion-icon name="videocam"></ion-icon> Video</ion-col></button>
-                <button ion-button class="btn-footer"><ion-col><ion-icon name="photos"></ion-icon> 360°</ion-col></button>
-                <button ion-button class="btn-footer"><ion-col><ion-icon name="map"></ion-icon> Map</ion-col></button>
-            </ion-row>
-        </ion-grid>
-
-    </ion-toolbar>
-</ion-footer>

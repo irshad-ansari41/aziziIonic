@@ -1,9 +1,8 @@
 import {Component} from '@angular/core';
-import {IonicPage, Nav, NavController, NavParams, LoadingController} from 'ionic-angular';
+import {IonicPage, Nav, NavController, NavParams} from 'ionic-angular';
 
-import {PropertyProvider} from '../../providers/property/property';
 import {HomePage} from '../home/home';
-import {Constants} from '../../enum';
+//import {Constants} from '../../enum';
 
 /**
  * Generated class for the MorePage page.
@@ -19,11 +18,11 @@ import {Constants} from '../../enum';
 })
 export class MorePage {
 
+    public appVesrion = '1.0.0';
+
     constructor(public navCtrl: NavController,
         public navParams: NavParams,
-        public nav: Nav,
-        private propertyProvider: PropertyProvider,
-        private loadingController: LoadingController) {
+        public nav: Nav,) {
     }
 
     openHomePage() {

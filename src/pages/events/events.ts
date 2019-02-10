@@ -5,6 +5,9 @@ import {PropertyProvider} from '../../providers/property/property';
 
 import {HomePage} from '../home/home';
 import {MorePage} from '../more/more';
+import {EventDetailsPage} from '../event-details/event-details';
+
+import {Constants} from '../../enum';
 
 /**
  * Generated class for the EventsPage page.
@@ -46,7 +49,7 @@ export class EventsPage {
 
     getEvents() {
         let allEventsLoadingController = this.loadingController.create({
-            content: "getting your data from server"
+            content: Constants.LoadingMsg
         });
         allEventsLoadingController.present();
 
@@ -55,11 +58,15 @@ export class EventsPage {
             this.events = JSON.parse(retrievedObject);
             allEventsLoadingController.dismiss();
         } else {
-            this.propertyProvider.getAreas().subscribe((events) => {
+            this.propertyProvider.getEvents().subscribe((events) => {
                 this.events = events;
                 localStorage.setItem('events', JSON.stringify(events));
                 allEventsLoadingController.dismiss();
             });
         }
+    }
+    
+    openEventDetailPage(event:object){
+        this.navCtrl.push(EventDetailsPage,{event:event});
     }
 }

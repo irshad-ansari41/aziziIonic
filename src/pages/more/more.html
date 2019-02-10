@@ -12,7 +12,7 @@
         <ion-title>More</ion-title>
         <ion-buttons end>
             <button ion-button (click)="openHomePage()">
-                    <ion-icon name="home"></ion-icon>
+                    <ion-icon name="home" ></ion-icon>
             </button>
             <button ion-button (click)="openMorePage()">
                     <ion-icon name="more"></ion-icon>
@@ -22,6 +22,140 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+
+    <ion-list margin-bottom> 
+        <ion-list-header no-margin>
+            App Setting
+        </ion-list-header>
+
+        <ion-item>
+            <ion-icon name="notifications" item-start></ion-icon>
+            <ion-label>
+                <h2>Notification</h2>
+                <small>Manage your alerts</small>
+            </ion-label>
+            <ion-toggle value="foo" checked="true"></ion-toggle>
+        </ion-item>
+
+        <ion-item>
+            <ion-icon name="cloud-download" item-start></ion-icon>
+            <ion-label>
+                <h2>Offline Storage</h2>
+                <small>You can view PDF in your browser</small>
+            </ion-label>
+            <ion-toggle value="foo" checked="true"></ion-toggle>
+        </ion-item>
+
+        <ion-item>
+            <ion-icon name="open" item-start></ion-icon>
+            <ion-label>
+                <h2>Open PDF in Browser</h2>
+                <small>You can view PDF in your browser</small>
+            </ion-label>
+            <ion-toggle value="foo" checked="true"></ion-toggle>
+        </ion-item>
+
+        <ion-item>
+            <ion-icon name="sync" item-start></ion-icon>
+            <ion-label>
+                <h2>Sync Application</h2>
+                <small>Sync application for offline storage</small>
+            </ion-label>
+            <button ion-button color="primary" outline icon-start item-end>
+                <ion-icon name="sync" is-active="false"></ion-icon> Sync
+            </button>
+        </ion-item>
+
+        <ion-item>
+            <ion-icon name="trash" item-start></ion-icon>
+            <ion-label>
+                <h2>Clear Cache</h2>
+                <small>Remove all stored files</small>
+            </ion-label>
+            <button ion-button color="danger" outline icon-start item-end>
+                <ion-icon name="trash" is-active="false"></ion-icon> Clear
+            </button>
+        </ion-item>
+
+
+    </ion-list>
+
+    <ion-list margin-bottom> 
+
+
+        <ion-list-header no-margin>
+            Web Access
+        </ion-list-header>
+
+        <ion-item>
+            <ion-icon name="eye" item-start></ion-icon>
+            <ion-label>
+                <h2>View on Web</h2>
+                <small>You can access App on browser</small>
+            </ion-label>
+            <button ion-button color="primary" outline icon-start item-end>
+                <ion-icon name="open" is-active="false"></ion-icon> Web
+            </button>
+        </ion-item>
+
+
+    </ion-list>
+
+    <ion-list margin-bottom> 
+
+
+        <ion-list-header no-margin>
+            Support
+        </ion-list-header>
+
+        <ion-item>
+            <ion-icon name="star" item-start></ion-icon>
+            <ion-label>
+                <h2>Rate us on playstore</h2>
+            </ion-label>
+            <button ion-button color="secondary" outline icon-start item-end>
+                <ion-icon name="star" is-active="false"></ion-icon> Rating
+            </button>
+        </ion-item>
+        <ion-item>
+            <ion-icon name="share" item-start></ion-icon>
+            <ion-label>
+                <h2>Share this app</h2>
+            </ion-label>
+            <button ion-button color="secondary" outline icon-start item-end>
+                <ion-icon name="share" is-active="false"></ion-icon> Share
+            </button>
+        </ion-item>
+        <ion-item>
+            <ion-icon name="contact" item-start></ion-icon>
+            <ion-label>
+                <h2>Contact Us</h2>
+            </ion-label>
+            <button ion-button color="secondary" outline icon-start item-end>
+                <ion-icon name="mail-open" is-active="false"></ion-icon> Contact
+            </button>
+        </ion-item>
+
+
+    </ion-list>
+    <ion-list margin-bottom> 
+
+
+        <ion-list-header no-margin>
+            Information
+        </ion-list-header>
+
+        <ion-item>
+            <ion-icon name="information-circle" item-start></ion-icon>
+            <ion-label>
+                <h2>Version</h2>
+                <small>Current Version of this application is </small>
+            </ion-label>
+            <ion-badge item-end>{{appVesrion}}</ion-badge>
+        </ion-item>
+
+
+    </ion-list>
 
 </ion-content>

@@ -3,6 +3,8 @@ import {IonicPage, Nav, NavController, NavParams, Platform, LoadingController} f
 import {File} from '@ionic-native/file';
 import {DocumentViewer, DocumentViewerOptions} from '@ionic-native/document-viewer';
 import {FileTransfer} from '@ionic-native/file-transfer';
+import {InAppBrowser} from '@ionic-native/in-app-browser';
+//import {NativeStorage} from '@ionic-native/native-storage/ngx';
 
 import {PropertyProvider} from '../../providers/property/property';
 import {HomePage} from '../home/home';
@@ -39,6 +41,8 @@ export class BrochuresPage {
         private platform: Platform,
         private file: File,
         private transfer: FileTransfer,
+        //private nativeStorage: NativeStorage,
+        private iab: InAppBrowser,
         private loadingController: LoadingController,
     ) {
 
@@ -82,6 +86,11 @@ export class BrochuresPage {
         }
     }
 
+    openPdf(url: string) {
+        let browser = this.iab.create(url);
+        browser.close();
+    }
+
     openLocalPdf() {
         const options: DocumentViewerOptions = {
             title: 'My PDF'
@@ -89,7 +98,9 @@ export class BrochuresPage {
         this.document.viewDocument('assets/5-tools.pdf', 'application/pdf', options);
     }
 
-    downloadAndOpenPdf(pdfUrl) {
+    downloadAndOpenPdf(pdfUrl: string) {
+        let urlSegment = pdfUrl.split('/');
+        let filenName = urlSegment[urlSegment.length - 1];
         let path = null;
 
         if (this.platform.is('ios')) {
@@ -99,7 +110,7 @@ export class BrochuresPage {
         }
 
         const transfer = this.transfer.create();
-        transfer.download(pdfUrl, path + 'myfile.pdf').then(entry => {
+        transfer.download(pdfUrl, path + filenName).then(entry => {
             let url = entry.toURL();
             this.document.viewDocument(url, 'application/pdf', {});
         });

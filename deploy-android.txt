@@ -1,0 +1,71 @@
+
+cd /Users/irshad.ansari/Applications/aziziIonic
+
+cordova prepare
+
+export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
+
+cordova build --release android
+
+cd /Users/irshad.ansari/applications/aziziIonic/platforms/android/app/build/outputs/apk/release
+
+rm azizidevelopments.apk
+
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore AZIZI-release-key.keystore app-release-unsigned.apk AziziDevelopmentsApp
+
+/Users/irshad.ansari/Library/Android/sdk/build-tools/27.0.3/zipalign -v 4 app-release-unsigned.apk azizidevelopments.apk
+
+cordova platform list
+
+cordova platform rm android
+cordova platform rm browser
+
+cordova platform add android
+cordova platform add browser
+
+cordova plugin list
+
+cordova plugin rm cordova-plugin-console
+cordova plugin rm cordova-plugin-device 
+cordova plugin rm cordova-plugin-dialogs
+cordova plugin rm cordova-plugin-document-viewer  
+cordova plugin rm cordova-plugin-file 
+cordova plugin rm cordova-plugin-file-opener2 
+cordova plugin rm cordova-plugin-file-transfer 
+cordova plugin rm cordova-plugin-inappbrowser 
+cordova plugin rm cordova-plugin-network-information 
+cordova plugin rm cordova-plugin-splashscreen 
+cordova plugin rm cordova-plugin-statusbar 
+cordova plugin rm cordova-plugin-whitelist 
+cordova plugin rm cordova-plugin-x-socialsharing
+cordova plugin rm es6-promise-plugin
+cordova plugin rm phonegap-plugin-contentsync
+cordova plugin rm phonegap-plugin-push
+
+cordova plugin add cordova-plugin-console
+cordova plugin add cordova-plugin-device 
+cordova plugin add cordova-plugin-dialogs 
+cordova plugin add cordova-plugin-inappbrowser 
+cordova plugin add cordova-plugin-network-information 
+cordova plugin add cordova-plugin-splashscreen 
+cordova plugin add cordova-plugin-statusbar 
+cordova plugin add cordova-plugin-whitelist
+cordova plugin add cordova-plugin-document-viewer 
+cordova plugin add cordova-plugin-file 
+cordova plugin add cordova-plugin-file-opener2 
+cordova plugin add cordova-plugin-file-transfer 
+cordova plugin add cordova-plugin-x-socialsharing
+cordova plugin add es6-promise-plugin
+cordova plugin add cordova-plugin-insomnia
+
+cordova plugin add phonegap-plugin-contentsync
+
+cordova plugin add phonegap-plugin-push
+ 
+
+npm run build:prod -- --config scripts/my-config.js --output /Users/irshad.ansari/Applications/mobile-app/azizi-developments-android/www/framework7
+
+/Users/irshad.ansari/Applications/mobile-app/azizi-developments-android/www
+
+common error coming after release
+some wendwrong- Please check may be you calling  function of plugin without adding plugin

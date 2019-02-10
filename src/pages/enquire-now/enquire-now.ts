@@ -5,7 +5,6 @@ import {IonicSelectableComponent} from 'ionic-selectable';
 
 import {HomePage} from '../home/home';
 import {MorePage} from '../more/more';
-import {Constants} from '../../enum';
 
 import {PropertyProvider} from "../../providers/property/property";
 
@@ -16,10 +15,6 @@ import {PropertyProvider} from "../../providers/property/property";
  * Ionic pages and navigation.
  */
 
-class Port {
-    public id: number;
-    public name: string;
-}
 
 @IonicPage()
 @Component({
@@ -27,9 +22,6 @@ class Port {
     templateUrl: 'enquire-now.html',
 })
 export class EnquireNowPage {
-
-    ports: Port[];
-    port: Port;
 
     private form: FormGroup;
 

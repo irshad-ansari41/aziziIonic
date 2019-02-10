@@ -3,7 +3,7 @@ import {ErrorHandler, NgModule} from '@angular/core';
 import {IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
 import {HttpClientModule} from '@angular/common/http';
 import {ReactiveFormsModule} from '@angular/forms';
-import { IonicSelectableModule } from 'ionic-selectable';
+import {IonicSelectableModule} from 'ionic-selectable';
 
 import {MyApp} from './app.component';
 import {HomePage} from '../pages/home/home';
@@ -16,9 +16,16 @@ import {CommunityPageModule} from '../pages/community/community.module';
 import {BrochuresPageModule} from '../pages/brochures/brochures.module';
 import {FloorplansPageModule} from '../pages/floorplans/floorplans.module';
 import {EventsPageModule} from '../pages/events/events.module';
+import {EventDetailsPageModule} from '../pages/event-details/event-details.module';
 import {VideoGalleryPageModule} from '../pages/video-gallery/video-gallery.module';
 import {MortgageCalculatorPageModule} from '../pages/mortgage-calculator/mortgage-calculator.module';
 import {EnquireNowPageModule} from '../pages/enquire-now/enquire-now.module';
+import {ConstructionUpdatesPageModule} from '../pages/construction-updates/construction-updates.module';
+import {ConstructionsPageModule} from '../pages/constructions/constructions.module';
+import {ConstructionDetailsPageModule} from '../pages/construction-details/construction-details.module';
+import {MapPageModule} from '../pages/map/map.module';
+import {ViewVideoPageModule} from '../pages/view-video/view-video.module';
+import {LoginPageModule} from '../pages/login/login.module';
 
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
@@ -26,8 +33,12 @@ import {PropertyProvider} from '../providers/property/property';
 import {File} from '@ionic-native/file';
 import {FileTransfer} from '@ionic-native/file-transfer';
 import {DocumentViewer} from '@ionic-native/document-viewer';
+import {InAppBrowser} from '@ionic-native/in-app-browser';
+import {NativeStorage} from '@ionic-native/native-storage';
+
 
 import {PipesModule} from '../pipes/pipes.module';
+import {AuthProvider} from '../providers/auth/auth';
 
 @NgModule({
     declarations: [
@@ -51,7 +62,14 @@ import {PipesModule} from '../pipes/pipes.module';
         VideoGalleryPageModule,
         MortgageCalculatorPageModule,
         MorePageModule,
-        EnquireNowPageModule
+        EnquireNowPageModule,
+        EventDetailsPageModule,
+        ConstructionUpdatesPageModule,
+        ConstructionsPageModule,
+        ConstructionDetailsPageModule,
+        MapPageModule,
+        ViewVideoPageModule,
+        LoginPageModule
     ],
     bootstrap: [IonicApp],
     entryComponents: [
@@ -67,6 +85,9 @@ import {PipesModule} from '../pipes/pipes.module';
         File,
         FileTransfer,
         DocumentViewer,
+        InAppBrowser,
+        AuthProvider,
+        NativeStorage
     ]
 })
 

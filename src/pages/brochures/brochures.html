@@ -10,7 +10,7 @@
             <ion-icon name="menu"></ion-icon>
         </button>
         <ion-title>Brochures</ion-title>
-         <ion-buttons end>
+        <ion-buttons end>
             <button ion-button (click)="openHomePage()">
                     <ion-icon name="home"></ion-icon>
             </button>
@@ -24,24 +24,24 @@
 
 <ion-content padding>
 
-    <div class="tab"  *ngFor="let project of brochures|keys">
-         <input id="{{ project.key }}" type="checkbox" name="tabs">
-        <label for="{{ project.key }}">{{ project.key }}</label>
-        <div class="tab-content">
-            <ion-item *ngFor="let brochure of project.value|keys" >
-
-                {{ brochure.value.name }}
-                <button ion-button outline item-end icon-start (click)="openLocalPdf(brochure.value.brochure)">
-                        <ion-icon name="open"></ion-icon>
-                </button>
-                <button ion-button outline item-end icon-start (click)="downloadAndOpenPdf(brochure.value.brochure)">
-                        <ion-icon name="download"></ion-icon>
-                </button>
-            </ion-item>
-        </div>
-    </div>
-
-
-
+    <ion-row>
+        <ion-col col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3  *ngFor="let project of brochures|keys">
+                 <div class="tab">
+                <input id="{{ project.key }}" type="checkbox" name="tabs">
+                <label for="{{ project.key }}">{{ project.key }}</label>
+                <div class="tab-content">
+                    <ion-item *ngFor="let brochure of project.value" >
+                        {{ brochure.name }}
+                        <button ion-button outline item-end icon-start (click)="openPdf(brochure.file)">
+                            <ion-icon name="open"></ion-icon>
+                        </button>
+                        <button ion-button outline item-end icon-start (click)="downloadAndOpenPdf(brochure.file)">
+                                <ion-icon name="download"></ion-icon>
+                        </button>
+                    </ion-item>
+                </div>
+            </div>
+        </ion-col>
+    </ion-row>
 
 </ion-content>

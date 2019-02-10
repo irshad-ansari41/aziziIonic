@@ -16,11 +16,16 @@
 </ion-header>
 
 <ion-content class="card-background-page">
-    <ion-card *ngFor="let area of areas.list|keys" (click)="openPropertiesPage(area)">
-        <img [src]="area.value.image">
-        <div class="card-background">
-            <div class="card-title">{{area.value.name}}</div>
-            <div class="card-subtitle">Dubai, UAE</div>
-        </div>
-    </ion-card>
+    <ion-row>
+        <ion-col col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 *ngFor="let area of areas" >
+            <ion-card (click)="area.community_id?openCommunityPage(area):openPropertiesPage(area)">
+                <img [src]="area.image">
+                <div class="card-background">
+                    <div class="card-title">{{area.name}}</div>
+                    <div class="card-subtitle">Dubai, UAE</div>
+                </div>
+            </ion-card>
+        </ion-col>
+    </ion-row>
+
 </ion-content>

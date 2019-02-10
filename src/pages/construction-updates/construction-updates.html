@@ -6,13 +6,34 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Construction Updates</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Construction Updates</ion-title>
+        <ion-buttons end>
+            <button ion-button (click)="openHomePage()">
+                    <ion-icon name="home"></ion-icon>
+            </button>
+            <button ion-button (click)="openMorePage()">
+                    <ion-icon name="more"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content class="card-background-page">
+    <ion-row>
+        <ion-col col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 *ngFor="let area of areas" >
+                <ion-card (click)="area.community_id?openCommunityPage(area):openConstructionsPage(area)">
+                <img [src]="area.image">
+                <div class="card-background">
+                    <div class="card-title">{{area.name}}</div>
+                    <div class="card-subtitle">Dubai, UAE</div>
+                </div>
+            </ion-card>
+        </ion-col>
+    </ion-row>
 </ion-content>

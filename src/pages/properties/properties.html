@@ -10,7 +10,7 @@
         <button ion-button menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
-        <ion-title>Properties</ion-title>
+        <ion-title>{{areaName}}</ion-title>
         <ion-buttons end>
             <button ion-button (click)="openHomePage()">
                     <ion-icon name="home"></ion-icon>
@@ -23,11 +23,17 @@
 </ion-header>
 
 <ion-content class="card-background-page">
-    <ion-card *ngFor="let property of properties.list|keys" (click)="openPropertyPage(property)">
-        <img [src]="property.value.featured_image">
-        <div class="card-background">
-            <div class="card-title">{{property.value.name}}</div>
-            <div class="card-subtitle">Dubai, UAE</div>
-        </div>
-    </ion-card>
+
+    <ion-row>
+        <ion-col  col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 *ngFor="let property of properties" >
+                  <ion-card (click)="openPropertyPage(property)">
+                <img [src]="property.image">
+                <div class="card-background">
+                    <div class="card-title">{{property.name}}</div>
+                    <div class="card-subtitle">Dubai, UAE</div>
+                </div>
+            </ion-card>
+        </ion-col>
+    </ion-row>
+
 </ion-content>

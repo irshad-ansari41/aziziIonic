@@ -43,58 +43,69 @@
 
     <div [ngSwitch]="pet" >
         <ion-list *ngSwitchCase="'Commercial'">
-            <ion-card *ngFor="let g of galleries.Commercial|keys">
-                <div class="videoWrapper">
-                    <iframe [src]="generateVideoUrl(g.value.video_id)" frameborder="0" allow="accelerometer; loop; encrypted-media; gyroscope; picture-in-picture" allowfullscreen border="0" style="border:0"></iframe>
-                </div>
-                <ion-card-content>
-                    <ion-card-title>
-                        {{g.value.name}}
-                    </ion-card-title>
-                    <p>
-                        {{g.value.info}}
-                    </p>
-                </ion-card-content>
-            </ion-card>
-
-
+            
+            <ion-row>
+                <ion-col col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 *ngFor="let g of galleries.Commercial|keys">
+                         <ion-card>
+                        <div class="videoWrapper">
+                            <iframe [src]="generateVideoUrl(g.value.video_id)" frameborder="0" allow="accelerometer; loop; encrypted-media; gyroscope; picture-in-picture" allowfullscreen border="0" style="border:0"></iframe>
+                        </div>
+                        <ion-card-content>
+                            <ion-card-title>
+                                {{g.value.name}}
+                            </ion-card-title>
+                            <p>
+                                {{g.value.info}}
+                            </p>
+                        </ion-card-content>
+                    </ion-card>
+                </ion-col>
+            </ion-row>
 
         </ion-list>
 
         <ion-list *ngSwitchCase="'Corporate'">
-
-            <ion-card *ngFor="let g of galleries.Corporate|keys">
-                <div class="videoWrapper">
-                    <iframe [src]="generateVideoUrl(g.value.video_id)" frameborder="0" allow="accelerometer; loop; encrypted-media; gyroscope; picture-in-picture" allowfullscreen border="0" style="border:0"></iframe>
-                </div>
-                <ion-card-content>
-                    <ion-card-title>
-                        {{g.value.name}}
-                    </ion-card-title>
-                    <p>
-                        {{g.value.info}}
-                    </p>
-                </ion-card-content>
-            </ion-card>
+            
+            <ion-row>
+                <ion-col col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 *ngFor="let g of galleries.Corporate|keys">
+                    <ion-card>
+                        <div class="videoWrapper">
+                            <iframe [src]="generateVideoUrl(g.value.video_id)" frameborder="0" allow="accelerometer; loop; encrypted-media; gyroscope; picture-in-picture" allowfullscreen border="0" style="border:0"></iframe>
+                        </div>
+                        <ion-card-content>
+                            <ion-card-title>
+                                {{g.value.name}}
+                            </ion-card-title>
+                            <p>
+                                {{g.value.info}}
+                            </p>
+                        </ion-card-content>
+                    </ion-card>
+                </ion-col>
+            </ion-row>
 
         </ion-list>
 
         <ion-list *ngSwitchCase="'Event'">
-
-            <ion-card *ngFor="let g of galleries.Event|keys">
-                <div class="videoWrapper">
-                    <iframe [src]="generateVideoUrl(g.value.video_id)" frameborder="0" allow="accelerometer; loop; encrypted-media; gyroscope; picture-in-picture" allowfullscreen border="0" style="border:0"></iframe>
-                </div>
-                <ion-card-content>
-                    <ion-card-title>
-                        {{g.value.name}}
-                    </ion-card-title>
-                    <p>
-                        {{g.value.info}}
-                    </p>
-                </ion-card-content>
-            </ion-card>
-
+            
+            <ion-row>
+                <ion-col col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3  *ngFor="let g of galleries.Event|keys">
+                    <ion-card>
+                        <div class="videoWrapper">
+                            <iframe [src]="generateVideoUrl(g.value.video_id)" frameborder="0" allow="accelerometer; loop; encrypted-media; gyroscope; picture-in-picture" allowfullscreen border="0" style="border:0"></iframe>
+                        </div>
+                        <ion-card-content>
+                            <ion-card-title>
+                                {{g.value.name}}
+                            </ion-card-title>
+                            <p>
+                                {{g.value.info}}
+                            </p>
+                        </ion-card-content>
+                    </ion-card>
+                </ion-col>
+            </ion-row>
+            
         </ion-list>
     </div>
 

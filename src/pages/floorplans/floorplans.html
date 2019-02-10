@@ -25,24 +25,24 @@
 
 <ion-content padding>
 
-    <div class="tab"  *ngFor="let project of floorplans|keys">
-         <input id="{{ project.key }}" type="checkbox" name="tabs">
-        <label for="{{ project.key }}">{{ project.key }}</label>
-        <div class="tab-content">
-            <ion-item *ngFor="let floorplan of project.value|keys" >
-
-                {{ floorplan.value.name }}
-                <button ion-button outline item-end icon-start (click)="openLocalPdf(floorplan.value.brochure)">
-                        <ion-icon name="open"></ion-icon>
-                </button>
-                <button ion-button outline item-end icon-start (click)="downloadAndOpenPdf(floorplan.value.brochure)">
-                        <ion-icon name="download"></ion-icon>
-                </button>
-            </ion-item>
-        </div>
-    </div>
-
-
-
+    <ion-row>
+        <ion-col col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3  *ngFor="let project of floorplans|keys">
+            <div class="tab">
+                <input id="{{ project.key }}" type="checkbox" name="tabs">
+                <label for="{{ project.key }}">{{ project.key }}</label>
+                <div class="tab-content">
+                    <ion-item *ngFor="let floorplan of project.value" >
+                        {{ floorplan.name }}
+                        <button ion-button outline item-end icon-start (click)="openPdf(floorplan.file)">
+                            <ion-icon name="open"></ion-icon>
+                        </button>
+                        <button ion-button outline item-end icon-start (click)="downloadAndOpenPdf(floorplan.file)">
+                                <ion-icon name="download"></ion-icon>
+                        </button>
+                    </ion-item>
+                </div>
+            </div>
+        </ion-col>
+    </ion-row>
 
 </ion-content>

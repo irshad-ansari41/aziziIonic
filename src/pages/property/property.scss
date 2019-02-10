@@ -25,11 +25,27 @@ page-property {
         width: 100%;
         color: #fff;
     }
-    .slide-background{
-        background-size: cover!important;
-        background-position: center center!important;
+
+    .slide-image{ 
+        width: 100vw;
+        object-fit: cover;
         height: 100vh;
     }
+
+    .show-buttons{
+        ion-row{
+            margin: auto;
+        }
+        position: absolute;
+        bottom: 30px;
+        z-index: 1;
+        padding: 0 16px;
+        text-align: center;
+    }
+
+   
+
+
 
 }
 

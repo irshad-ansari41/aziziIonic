@@ -1,0 +1,44 @@
+<!--
+  Generated template for the EventDetailsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Event Details</ion-title>
+        <ion-buttons end>
+            <button ion-button (click)="openHomePage()">
+                    <ion-icon name="home"></ion-icon>
+            </button>
+            <button ion-button (click)="openMorePage()">
+                    <ion-icon name="more"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+    <ion-card>
+        <img [src]="event.image"/>
+        <ion-card-content>
+            <ion-card-title>
+                {{event.name}}
+            </ion-card-title>
+            <h3 padding-bottom>{{event.event_date}}</h3>
+            <div [innerHTML]="event.content"></div>
+        </ion-card-content>
+    </ion-card>
+</ion-content>
+
+<ion-footer>
+    <ion-toolbar>
+        <button ion-button text-center full color="royal" (click)="openRsvpPage()">
+            <ion-icon name="send"></ion-icon> RSVP
+        </button>
+    </ion-toolbar>
+</ion-footer>

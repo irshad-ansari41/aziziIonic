@@ -22,6 +22,20 @@
 </ion-header>
 
 
-<ion-content padding>
-Events
+<ion-content>
+    <ion-card *ngFor="let event of events|keys" (click)="openEventDetailPage(event.value)">
+        <img [src]="event.value.image"/>
+        <ion-card-content>
+            <ion-card-title>
+                {{event.value.name}}
+            </ion-card-title>
+            <h3 padding-bottom>{{event.value.event_date}}</h3>
+            <span [innerHTML]="event.value.text|slice:0:300"></span>...
+            <ion-row>
+                <ion-col text-right>
+                    <a>Read More</a>
+                </ion-col>
+            </ion-row>
+        </ion-card-content>
+    </ion-card>
 </ion-content>
