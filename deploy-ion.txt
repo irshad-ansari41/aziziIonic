@@ -1,0 +1,6 @@
+cd /Users/irshad.ansari/Applications/aziziIonic
+
+cordova prepare
+
+open /Users/irshad.ansari/Applications/aziziIonic/platforms/ios/Azizi-Developments.xcworkspace
+

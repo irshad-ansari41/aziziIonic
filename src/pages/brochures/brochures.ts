@@ -2,7 +2,8 @@ import {Component} from '@angular/core';
 import {IonicPage, Nav, NavController, NavParams, Platform, LoadingController} from 'ionic-angular';
 import {File} from '@ionic-native/file';
 import {DocumentViewer, DocumentViewerOptions} from '@ionic-native/document-viewer';
-import {FileTransfer} from '@ionic-native/file-transfer';
+import {FileTransfer, FileUploadOptions, FileTransferObject} from '@ionic-native/file-transfer';
+
 import {InAppBrowser} from '@ionic-native/in-app-browser';
 //import {NativeStorage} from '@ionic-native/native-storage/ngx';
 
@@ -50,6 +51,7 @@ export class BrochuresPage {
     }
 
 
+
     openHomePage() {
         this.nav.setRoot(HomePage);
     }
@@ -91,16 +93,10 @@ export class BrochuresPage {
         browser.close();
     }
 
-    openLocalPdf() {
-        const options: DocumentViewerOptions = {
-            title: 'My PDF'
-        }
-        this.document.viewDocument('assets/5-tools.pdf', 'application/pdf', options);
-    }
+    openLocalPdf(fileUrl: string) {
 
-    downloadAndOpenPdf(pdfUrl: string) {
-        let urlSegment = pdfUrl.split('/');
-        let filenName = urlSegment[urlSegment.length - 1];
+        let urlSegment = fileUrl.split('/');
+        let filenName = urlSegment[urlSegment.length - 1].replace(/ /g, '-');
         let path = null;
 
         if (this.platform.is('ios')) {
@@ -109,11 +105,34 @@ export class BrochuresPage {
             path = this.file.dataDirectory;
         }
 
-        const transfer = this.transfer.create();
-        transfer.download(pdfUrl, path + filenName).then(entry => {
-            let url = entry.toURL();
-            this.document.viewDocument(url, 'application/pdf', {});
+        const options: DocumentViewerOptions = {
+            title: filenName
+        }
+        this.document.viewDocument(path + filenName, 'application/pdf', options);
+    }
+
+
+    download(fileUrl: string) {
+
+        let urlSegment = fileUrl.split('/');
+        let filenName = urlSegment[urlSegment.length - 1].replace(/ /g, '-');
+        let path = null;
+
+        if (this.platform.is('ios')) {
+            path = this.file.documentsDirectory;
+        } else if (this.platform.is('android')) {
+            path = this.file.dataDirectory;
+        }
+        console.log(path + filenName);
+
+        const fileTransfer: FileTransferObject = this.transfer.create();
+        fileTransfer.download(fileUrl, path + filenName).then((entry) => {
+            console.log('download complete: ' + entry.toURL());
+        }, (error) => {
+            // handle error
         });
+
+
     }
 
     onPossible() {

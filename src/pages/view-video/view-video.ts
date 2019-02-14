@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {DomSanitizer} from '@angular/platform-browser';
-
+import {VideoPlayer} from '@ionic-native/video-player/ngx';
 /**
  * Generated class for the ViewVideoPage page.
  *
@@ -18,16 +18,23 @@ export class ViewVideoPage {
 
     public videoUrl: any;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, private sanitizer: DomSanitizer) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, private sanitizer: DomSanitizer, private videoPlayer: VideoPlayer) {
     }
 
     ionViewDidLoad() {
         let url = this.navParams.get('url');
         let urlSegment = url.split('/');
-        let videoId = urlSegment[4].replace('?rel=0','');
+        let videoId = urlSegment[4].replace('?rel=0', '');
         console.log(videoId);
         this.videoUrl = this.generateVideoUrl(videoId);
         console.log('ionViewDidLoad ViewVideoPage');
+
+        this.videoPlayer.play('file:///android_asset/www/movie.mp4').then(() => {
+            console.log('video completed');
+        }).catch(err => {
+            console.log(err);
+        });
+
     }
 
     generateVideoUrl(videoId: string) {

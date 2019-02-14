@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {IonicPage, Nav, NavController, NavParams} from 'ionic-angular';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {IonicSelectableComponent} from 'ionic-selectable';
+import {HTTP} from '@ionic-native/http/ngx';
 
 import {HomePage} from '../home/home';
 import {MorePage} from '../more/more';
@@ -31,7 +32,7 @@ export class EnquireNowPage {
 
 
     validation_messages = {
-        
+
         'name': [
             {type: 'required', message: 'Name is required.'}
         ],
@@ -66,13 +67,14 @@ export class EnquireNowPage {
         'source': [
             {type: 'required', message: 'Name is required.'}
         ],
-        
+
     };
 
     constructor(public navCtrl: NavController,
         public navParams: NavParams,
         public nav: Nav,
         private propertyProvider: PropertyProvider,
+        private http: HTTP,
         private formBuilder: FormBuilder) {
 
         this.sources = ['Airport', 'La Mer', 'City Walk', 'Other'];
@@ -106,6 +108,23 @@ export class EnquireNowPage {
 
     logForm() {
         console.log(this.form.value);
+        var data = this.form.value;
+        var header = {"headers": {"Content-Type": "application/json"}};
+        this.http.post('https:/azizidevelopments.com/save-lead', {data}, {header})
+            .then(data => {
+
+                console.log(data.status);
+                console.log(data.data); // data received by server
+                console.log(data.headers);
+
+            })
+            .catch(error => {
+
+                console.log(error.status);
+                console.log(error.error); // error message as string
+                console.log(error.headers);
+
+            });
     }
 
     openHomePage() {

@@ -35,6 +35,7 @@ import {FileTransfer} from '@ionic-native/file-transfer';
 import {DocumentViewer} from '@ionic-native/document-viewer';
 import {InAppBrowser} from '@ionic-native/in-app-browser';
 import {NativeStorage} from '@ionic-native/native-storage';
+import {HTTP} from '@ionic-native/http/ngx';
 
 
 import {PipesModule} from '../pipes/pipes.module';
@@ -87,7 +88,8 @@ import {AuthProvider} from '../providers/auth/auth';
         DocumentViewer,
         InAppBrowser,
         AuthProvider,
-        NativeStorage
+        NativeStorage,
+        HTTP
     ]
 })
 
