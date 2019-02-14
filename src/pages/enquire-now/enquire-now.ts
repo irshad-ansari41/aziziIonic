@@ -31,13 +31,7 @@ export class EnquireNowPage {
 
 
     validation_messages = {
-        'username': [
-            {type: 'required', message: 'Username is required.'},
-            {type: 'minlength', message: 'Username must be at least 5 characters long.'},
-            {type: 'maxlength', message: 'Username cannot be more than 25 characters long.'},
-            {type: 'pattern', message: 'Your username must contain only numbers and letters.'},
-            {type: 'validUsername', message: 'Your username has already been taken.'}
-        ],
+        
         'name': [
             {type: 'required', message: 'Name is required.'}
         ],
@@ -72,20 +66,7 @@ export class EnquireNowPage {
         'source': [
             {type: 'required', message: 'Name is required.'}
         ],
-        'password': [
-            {type: 'required', message: 'Password is required.'},
-            {type: 'minlength', message: 'Password must be at least 5 characters long.'},
-            {type: 'pattern', message: 'Your password must contain at least one uppercase, one lowercase, and one number.'}
-        ],
-        'confirm_password': [
-            {type: 'required', message: 'Confirm password is required'}
-        ],
-        'matching_passwords': [
-            {type: 'areEqual', message: 'Password mismatch'}
-        ],
-        'terms': [
-            {type: 'pattern', message: 'You must accept terms and conditions.'}
-        ],
+        
     };
 
     constructor(public navCtrl: NavController,
@@ -105,10 +86,10 @@ export class EnquireNowPage {
                 Validators.required,
                 Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]
             )],
-            gender: ['', Validators.required],
-            age: ['', Validators.required],
+            gender: [''],
+            age: [''],
             source: ['', Validators.required],
-            stay: ['', Validators.required],
+            stay: [''],
             country_code: ['', Validators.required],
             nationality: ['', Validators.required],
             country: ['', Validators.required],
