@@ -52,9 +52,9 @@ export class VideoGalleryPage {
         });
         allGalleriesLoadingController.present();
 
-        let retrievedObject = localStorage.getItem('galleries');
+        let retrievedObject = JSON.parse(localStorage.getItem('galleries'));
         if (typeof retrievedObject !== 'undefined' && retrievedObject !== null) {
-            this.galleries = JSON.parse(retrievedObject);
+            this.galleries = retrievedObject;
             allGalleriesLoadingController.dismiss();
         } else {
             this.propertyProvider.getVideoGalleries().subscribe((floorplans) => {

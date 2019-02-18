@@ -55,9 +55,9 @@ export class PropertiesPage {
         allPropertiesLoadingController.present();
 
         let key = 'properties_' + area.id;
-        let retrievedObject = localStorage.getItem(key);
+        let retrievedObject = JSON.parse(localStorage.getItem(key));
         if (typeof retrievedObject !== 'undefined' && retrievedObject !== null) {
-            this.properties = JSON.parse(retrievedObject);
+            this.properties = retrievedObject;
             allPropertiesLoadingController.dismiss();
         } else {
             this.propertyProvider.getProperties(area).subscribe((properties) => {

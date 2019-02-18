@@ -64,9 +64,9 @@ export class FloorplansPage {
         });
         allFloorplansLoadingController.present();
 
-        let retrievedObject = localStorage.getItem('floorplans');
+        let retrievedObject = JSON.parse(localStorage.getItem('floorplans'));
         if (typeof retrievedObject !== 'undefined' && retrievedObject !== null) {
-            this.floorplans = JSON.parse(retrievedObject);
+            this.floorplans = retrievedObject;
             allFloorplansLoadingController.dismiss();
         } else {
             this.propertyProvider.getFloorplans().subscribe((floorplans) => {

@@ -56,9 +56,9 @@ export class ConstructionDetailsPage {
             content: Constants.LoadingMsg
         });
         allPropertyLoadingController.present();
-        let retrievedObject = localStorage.getItem('construction_' + property.id);
+        let retrievedObject = JSON.parse(localStorage.getItem('construction_' + property.id));
         if (typeof retrievedObject !== 'undefined' && retrievedObject !== null) {
-            this.construction = JSON.parse(retrievedObject);
+            this.construction = retrievedObject;
             allPropertyLoadingController.dismiss();
         } else {
             this.propertyProvider.getConstruction(property).subscribe((construction) => {

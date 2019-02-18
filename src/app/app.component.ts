@@ -9,7 +9,7 @@ import {FloorplansPage} from '../pages/floorplans/floorplans';
 import {EventsPage} from '../pages/events/events';
 import {VideoGalleryPage} from '../pages/video-gallery/video-gallery';
 import {EnquireNowPage} from '../pages/enquire-now/enquire-now';
-//import {LoginPage} from '../pages/login/login';
+import {LoginPage} from '../pages/login/login';
 import {MortgageCalculatorPage} from '../pages/mortgage-calculator/mortgage-calculator'
 import {ConstructionUpdatesPage} from '../pages/construction-updates/construction-updates'
 
@@ -37,7 +37,7 @@ export class MyApp {
             {title: 'Video Gallery', component: VideoGalleryPage, icon: 'videocam', },
             {title: 'Mortgage Calculator', component: MortgageCalculatorPage, icon: 'calculator', },
             {title: 'Enquire Now', component: EnquireNowPage, icon: 'mail', },
-            //{title: 'Login', component: LoginPage, icon: 'person', },
+            {title: 'Login', component: LoginPage, icon: 'person', },
         ];
 
     }

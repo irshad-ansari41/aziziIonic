@@ -64,9 +64,9 @@ export class CommunityPage {
         allPropertiesLoadingController.present();
 
         let key = 'property_communities_' + area.id;
-        let retrievedObject = localStorage.getItem(key);
+        let retrievedObject = JSON.parse(localStorage.getItem(key));
         if (typeof retrievedObject !== 'undefined' && retrievedObject !== null) {
-            this.communities = JSON.parse(retrievedObject);
+            this.communities = retrievedObject;
             allPropertiesLoadingController.dismiss();
         } else {
             this.propertyProvider.getPropertyCommunities(area).subscribe((constructions) => {
@@ -84,9 +84,9 @@ export class CommunityPage {
         allPropertiesLoadingController.present();
 
         let key = 'constructions_communities_' + area.id;
-        let retrievedObject = localStorage.getItem(key);
+        let retrievedObject = JSON.parse(localStorage.getItem(key));
         if (typeof retrievedObject !== 'undefined' && retrievedObject !== null) {
-            this.communities = JSON.parse(retrievedObject);
+            this.communities = retrievedObject;
             allPropertiesLoadingController.dismiss();
         } else {
             this.propertyProvider.getConstructionCommunities(area).subscribe((constructions) => {

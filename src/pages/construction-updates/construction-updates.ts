@@ -59,9 +59,9 @@ export class ConstructionUpdatesPage {
         });
         allAreasLoadingController.present();
 
-        let retrievedObject = localStorage.getItem('construction_areas');
+        let retrievedObject = JSON.parse(localStorage.getItem('construction_areas'));
         if (typeof retrievedObject !== 'undefined' && retrievedObject !== null) {
-            this.areas = JSON.parse(retrievedObject);
+            this.areas = retrievedObject;
             allAreasLoadingController.dismiss();
         } else {
             this.propertyProvider.getContrcutionProjects().subscribe((areas) => {

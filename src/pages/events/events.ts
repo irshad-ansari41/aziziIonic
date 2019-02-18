@@ -53,9 +53,9 @@ export class EventsPage {
         });
         allEventsLoadingController.present();
 
-        let retrievedObject = localStorage.getItem('events');
+        let retrievedObject = JSON.parse(localStorage.getItem('events'));
         if (typeof retrievedObject !== 'undefined' && retrievedObject !== null) {
-            this.events = JSON.parse(retrievedObject);
+            this.events = retrievedObject;
             allEventsLoadingController.dismiss();
         } else {
             this.propertyProvider.getEvents().subscribe((events) => {

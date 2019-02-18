@@ -74,9 +74,9 @@ export class BrochuresPage {
         });
         allBrochuresLoadingController.present();
 
-        let retrievedObject = localStorage.getItem('brochures');
+        let retrievedObject = JSON.parse(localStorage.getItem('brochures'));
         if (typeof retrievedObject !== 'undefined' && retrievedObject !== null) {
-            this.brochures = JSON.parse(retrievedObject);
+            this.brochures = retrievedObject;
             allBrochuresLoadingController.dismiss();
         } else {
             this.propertyProvider.getBrouchures().subscribe((brochures) => {

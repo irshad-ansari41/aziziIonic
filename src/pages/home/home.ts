@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {Nav, NavController, LoadingController} from 'ionic-angular';
-import {PropertyProvider,Area} from '../../providers/property/property';
+import {PropertyProvider, Area} from '../../providers/property/property';
 
 import {PropertiesPage} from '../properties/properties';
 import {CommunityPage} from '../community/community';
@@ -23,12 +23,11 @@ export class HomePage {
         let allAreasLoadingController = this.loadingController.create({
             content: Constants.LoadingMsg
         });
-        //allAreasLoadingController.present();
-        //allAreasLoadingController.dismiss();
+        allAreasLoadingController.present();
 
-        let retrievedObject = localStorage.getItem('areas');
+        let retrievedObject = JSON.parse(localStorage.getItem('areas'));
         if (typeof retrievedObject !== 'undefined' && retrievedObject !== null) {
-            this.areas = JSON.parse(retrievedObject);
+            this.areas = retrievedObject;
             allAreasLoadingController.dismiss();
         } else {
             this.propertyProvider.getProjects().subscribe((areas) => {

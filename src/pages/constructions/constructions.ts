@@ -54,9 +54,9 @@ export class ConstructionsPage {
         allPropertiesLoadingController.present();
 
         let key = 'constructions_' + area.slug;
-        let retrievedObject = localStorage.getItem(key);
+        let retrievedObject = JSON.parse(localStorage.getItem(key));
         if (typeof retrievedObject !== 'undefined' && retrievedObject !== null) {
-            this.constructions = JSON.parse(retrievedObject);
+            this.constructions = retrievedObject;
             allPropertiesLoadingController.dismiss();
         } else {
             this.propertyProvider.getConstructions(area).subscribe((constructions) => {

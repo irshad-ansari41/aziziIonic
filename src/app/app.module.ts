@@ -35,7 +35,7 @@ import {FileTransfer} from '@ionic-native/file-transfer';
 import {DocumentViewer} from '@ionic-native/document-viewer';
 import {InAppBrowser} from '@ionic-native/in-app-browser';
 import {NativeStorage} from '@ionic-native/native-storage';
-import {HTTP} from '@ionic-native/http/ngx';
+import { IonicStorageModule } from '@ionic/storage';
 
 
 import {PipesModule} from '../pipes/pipes.module';
@@ -53,6 +53,7 @@ import {AuthProvider} from '../providers/auth/auth';
         ReactiveFormsModule,
         IonicSelectableModule,
         IonicModule.forRoot(MyApp),
+        IonicStorageModule.forRoot(),
         PipesModule,
         PropertiesPageModule,
         CommunityPageModule,
@@ -89,7 +90,6 @@ import {AuthProvider} from '../providers/auth/auth';
         InAppBrowser,
         AuthProvider,
         NativeStorage,
-        HTTP
     ]
 })
 

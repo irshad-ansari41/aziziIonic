@@ -23,8 +23,14 @@
 
 
 <ion-content>
+    <ion-item>
+        <ion-icon name="mail" item-start></ion-icon>
+        Fill Your Details
+        <ion-badge item-end  *ngIf="currentUser.id">Hi, {{currentUser.first_name}} {{currentUser.last_name}}</ion-badge>
+        <ion-badge item-end (click)="openLoginPage()" *ngIf="!currentUser.id">Agent Login</ion-badge>
+    </ion-item>
 
-    <form [formGroup]="form" (ngSubmit)="logForm()">
+    <form [formGroup]="form" (ngSubmit)="leadForm()">
         <ion-list>
 
             <ion-item>
@@ -34,171 +40,171 @@
             <div padding-left class="validation-errors">
                 <ng-container *ngFor="let validation of validation_messages.name">
                     <div class="error-message" *ngIf="form.get('name').hasError(validation.type) && (form.get('name').dirty || form.get('name').touched)">
-                      {{ validation.message }}
-                    </div>
-                </ng-container>
-            </div>
-
-            <ion-item>
-                <ion-label>Email<span class="required">*</span></ion-label>
-                <ion-input ype="text"  formControlName="email" placeholder="Email Address"></ion-input>
-            </ion-item>
-            
-            <div padding-left class="validation-errors">
-                <ng-container *ngFor="let validation of validation_messages.email">
-                    <div class="error-message" *ngIf="form.get('email').hasError(validation.type) && (form.get('email').dirty || form.get('email').touched)">
-                      {{ validation.message }}
-                    </div>
-                </ng-container>
-            </div>
-
-            <ion-item>
-                <ion-label>Where Staying</ion-label>
-                <ion-input type="text" formControlName="stay" placeholder="Where Staying"></ion-input>
-            </ion-item>
-            <div padding-left class="validation-errors">
-                <ng-container *ngFor="let validation of validation_messages.stay">
-                    <div class="error-message" *ngIf="form.get('stay').hasError(validation.type) && (form.get('stay').dirty || form.get('stay').touched)">
-                      {{ validation.message }}
-                    </div>
-                </ng-container>
-            </div>
-            
-            <ion-item>
-                <ion-label>Country of Nationality<span class="required">*</span></ion-label>
-                <ionic-selectable
-                    item-content 
-                    formControlName="nationality"
-                    [items]="countries"
-                    itemValueField="name"
-                    itemTextField="name"
-                    [canSearch]="true"
-                    placeholder=""
-                    (onChange)="portChange($event)">
-                </ionic-selectable>
-            </ion-item>
-            <div padding-left class="validation-errors">
-                <ng-container *ngFor="let validation of validation_messages.nationality">
-                    <div class="error-message" *ngIf="form.get('nationality').hasError(validation.type) && (form.get('nationality').dirty || form.get('nationality').touched)">
-                      {{ validation.message }}
-                    </div>
-                </ng-container>
-            </div>
-            
-            <ion-item>
-                <ion-label>Country of Residence<span class="required">*</span></ion-label>
-                <ionic-selectable
-                    item-content 
-                    formControlName="country"
-                    [items]="countries"
-                    itemValueField="name"
-                    itemTextField="name"
-                    [canSearch]="true"
-                    placeholder=""
-                    (onChange)="portChange($event)">
-                </ionic-selectable>
-            </ion-item>
-            <div padding-left class="validation-errors">
-                <ng-container *ngFor="let validation of validation_messages.country">
-                    <div class="error-message" *ngIf="form.get('country').hasError(validation.type) && (form.get('country').dirty || form.get('country').touched)">
-                      {{ validation.message }}
-                    </div>
-                </ng-container>
-            </div>
-
-            
-            
-            <ion-item>
-                <ion-label>Country Code<span class="required">*</span></ion-label>
-                <ionic-selectable
-                    item-content 
-                    formControlName="country_code"
-                    [items]="countries"
-                    itemValueField="code"
-                    itemTextField="codeName"
-                    [canSearch]="true"
-                    placeholder=""
-                    (onChange)="portChange($event)">
-                </ionic-selectable>
-            </ion-item>
-            <div padding-left class="validation-errors">
-                <ng-container *ngFor="let validation of validation_messages.country_code">
-                    <div class="error-message" *ngIf="form.get('country_code').hasError(validation.type) && (form.get('country_code').dirty || form.get('country_code').touched)">
-                      {{ validation.message }}
-                    </div>
-                </ng-container>
-            </div>
-
-            <ion-item>
-                <ion-label>Phone<span class="required">*</span></ion-label>
-                <ion-input type="text" formControlName="phone"  placeholder="Phone Number"></ion-input>
-            </ion-item>
-            <div padding-left class="validation-errors">
-                <ng-container *ngFor="let validation of validation_messages.phone">
-                    <div class="error-message" *ngIf="form.get('phone').hasError(validation.type) && (form.get('phone').dirty || form.get('phone').touched)">
-                      {{ validation.message }}
-                    </div>
-                </ng-container>
-            </div>
-            
-            
-            <ion-item>
-                <ion-label>Gender</ion-label>
-                <ion-select formControlName="gender" interface="popover">
-                    <ion-option value="Female">Female</ion-option>
-                    <ion-option value="Male">Male</ion-option>
-                </ion-select>
-            </ion-item>
-            <div padding-left class="validation-errors">
-                <ng-container *ngFor="let validation of validation_messages.gender">
-                    <div class="error-message" *ngIf="form.get('gender').hasError(validation.type) && (form.get('gender').dirty || form.get('gender').touched)">
-                      {{ validation.message }}
-                    </div>
-                </ng-container>
-            </div>
-
-
-            <ion-item>
-                <ion-label>Age</ion-label>
-                <ionic-selectable
-                    item-content 
-                    formControlName="age"
-                    [items]="ages"
-                    itemValueField="age"
-                    itemTextField="age"
-                    [canSearch]="true"
-                    placeholder=""
-                    (onChange)="portChange($event)">
-                </ionic-selectable>
-            </ion-item>
-            <div padding-left class="validation-errors">
-                <ng-container *ngFor="let validation of validation_messages.age">
-                    <div class="error-message" *ngIf="form.get('age').hasError(validation.type) && (form.get('age').dirty || form.get('age').touched)">
-                      {{ validation.message }}
-                    </div>
-                </ng-container>
-            </div>
-
-            <ion-item>
-                <ion-label>Source<span class="required">*</span></ion-label>
-                <ion-select formControlName="source" interface="popover">
-                    <ion-option value="{{source}}" *ngFor="let source of sources">{{source}}</ion-option>
-                </ion-select>
-            </ion-item>
-            <div padding-left class="validation-errors">
-                <ng-container *ngFor="let validation of validation_messages.source">
-                    <div class="error-message" *ngIf="form.get('source').hasError(validation.type) && (form.get('source').dirty || form.get('source').touched)">
-                      {{ validation.message }}
-                    </div>
-                </ng-container>
-            </div>
-            
-        </ion-list>
-        <div padding>
-            <small></small>
-            <button ion-button block color="primary" type="submit" [disabled]="!form.valid">Submit</button>
+                     {{ validation.message }}
+                </div>
+            </ng-container>
         </div>
-    </form>
+
+        <ion-item>
+            <ion-label>Email<span class="required">*</span></ion-label>
+            <ion-input ype="text"  formControlName="email" placeholder="Email Address"></ion-input>
+        </ion-item>
+
+        <div padding-left class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.email">
+                <div class="error-message" *ngIf="form.get('email').hasError(validation.type) && (form.get('email').dirty || form.get('email').touched)">
+                 {{ validation.message }}
+            </div>
+        </ng-container>
+    </div>
+
+    <ion-item>
+        <ion-label>Where Staying</ion-label>
+        <ion-input type="text" formControlName="stay" placeholder="Where Staying"></ion-input>
+    </ion-item>
+    <div padding-left class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.stay">
+            <div class="error-message" *ngIf="form.get('stay').hasError(validation.type) && (form.get('stay').dirty || form.get('stay').touched)">
+             {{ validation.message }}
+        </div>
+    </ng-container>
+</div>
+
+<ion-item>
+    <ion-label>Nationality<span class="required">*</span></ion-label>
+    <ionic-selectable
+        item-content 
+        formControlName="nationality"
+        [items]="countries"
+        itemValueField="name"
+        itemTextField="name"
+        [canSearch]="true"
+        placeholder=""
+        (onChange)="portChange($event)">
+    </ionic-selectable>
+</ion-item>
+<div padding-left class="validation-errors">
+    <ng-container *ngFor="let validation of validation_messages.nationality">
+        <div class="error-message" *ngIf="form.get('nationality').hasError(validation.type) && (form.get('nationality').dirty || form.get('nationality').touched)">
+         {{ validation.message }}
+    </div>
+</ng-container>
+</div>
+
+<ion-item>
+    <ion-label>Country of Residence<span class="required">*</span></ion-label>
+    <ionic-selectable
+        item-content 
+        formControlName="country"
+        [items]="countries"
+        itemValueField="name"
+        itemTextField="name"
+        [canSearch]="true"
+        placeholder=""
+        (onChange)="portChange($event)">
+    </ionic-selectable>
+</ion-item>
+<div padding-left class="validation-errors">
+    <ng-container *ngFor="let validation of validation_messages.country">
+        <div class="error-message" *ngIf="form.get('country').hasError(validation.type) && (form.get('country').dirty || form.get('country').touched)">
+         {{ validation.message }}
+    </div>
+</ng-container>
+</div>
+
+
+
+<ion-item>
+    <ion-label>Country Code<span class="required">*</span></ion-label>
+    <ionic-selectable
+        item-content 
+        formControlName="country_code"
+        [items]="countries"
+        itemValueField="code"
+        itemTextField="codeName"
+        [canSearch]="true"
+        placeholder=""
+        (onChange)="portChange($event)">
+    </ionic-selectable>
+</ion-item>
+<div padding-left class="validation-errors">
+    <ng-container *ngFor="let validation of validation_messages.country_code">
+        <div class="error-message" *ngIf="form.get('country_code').hasError(validation.type) && (form.get('country_code').dirty || form.get('country_code').touched)">
+         {{ validation.message }}
+    </div>
+</ng-container>
+</div>
+
+<ion-item>
+    <ion-label>Phone<span class="required">*</span></ion-label>
+    <ion-input type="text" formControlName="phone"  placeholder="Phone Number"></ion-input>
+</ion-item>
+<div padding-left class="validation-errors">
+    <ng-container *ngFor="let validation of validation_messages.phone">
+        <div class="error-message" *ngIf="form.get('phone').hasError(validation.type) && (form.get('phone').dirty || form.get('phone').touched)">
+         {{ validation.message }}
+    </div>
+</ng-container>
+</div>
+
+
+<ion-item>
+    <ion-label>Gender</ion-label>
+    <ion-select formControlName="gender" interface="popover">
+        <ion-option value="Female">Female</ion-option>
+        <ion-option value="Male">Male</ion-option>
+    </ion-select>
+</ion-item>
+<div padding-left class="validation-errors">
+    <ng-container *ngFor="let validation of validation_messages.gender">
+        <div class="error-message" *ngIf="form.get('gender').hasError(validation.type) && (form.get('gender').dirty || form.get('gender').touched)">
+         {{ validation.message }}
+    </div>
+</ng-container>
+</div>
+
+
+<ion-item>
+    <ion-label>Age</ion-label>
+    <ionic-selectable
+        item-content 
+        formControlName="age"
+        [items]="ages"
+        itemValueField="age"
+        itemTextField="age"
+        [canSearch]="true"
+        placeholder=""
+        (onChange)="portChange($event)">
+    </ionic-selectable>
+</ion-item>
+<div padding-left class="validation-errors">
+    <ng-container *ngFor="let validation of validation_messages.age">
+        <div class="error-message" *ngIf="form.get('age').hasError(validation.type) && (form.get('age').dirty || form.get('age').touched)">
+         {{ validation.message }}
+    </div>
+</ng-container>
+</div>
+
+<ion-item>
+    <ion-label>Source<span class="required">*</span></ion-label>
+    <ion-select formControlName="source" interface="popover">
+        <ion-option value="{{source}}" *ngFor="let source of sources">{{source}}</ion-option>
+    </ion-select>
+</ion-item>
+<div padding-left class="validation-errors">
+    <ng-container *ngFor="let validation of validation_messages.source">
+        <div class="error-message" *ngIf="form.get('source').hasError(validation.type) && (form.get('source').dirty || form.get('source').touched)">
+         {{ validation.message }}
+    </div>
+</ng-container>
+</div>
+
+</ion-list>
+<div padding-left padding-right >
+    <small></small>
+    <button ion-button block color="primary" type="submit" [disabled]="!form.valid">Submit</button>
+</div>
+</form>
 
 
 

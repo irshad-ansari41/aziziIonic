@@ -107,9 +107,9 @@ export class PropertyPage {
         allPropertyLoadingController.present();
 
         let key = 'property_' + property.id;
-        let retrievedObject = localStorage.getItem(key);
+        let retrievedObject = JSON.parse(localStorage.getItem(key));
         if (typeof retrievedObject !== 'undefined' && retrievedObject !== null) {
-            this.property = JSON.parse(retrievedObject);
+            this.property = retrievedObject;
             allPropertyLoadingController.dismiss();
         } else {
             this.propertyProvider.getProperty(property).subscribe((property) => {
