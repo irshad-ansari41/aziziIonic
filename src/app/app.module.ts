@@ -35,7 +35,8 @@ import {FileTransfer} from '@ionic-native/file-transfer';
 import {DocumentViewer} from '@ionic-native/document-viewer';
 import {InAppBrowser} from '@ionic-native/in-app-browser';
 import {NativeStorage} from '@ionic-native/native-storage';
-import { IonicStorageModule } from '@ionic/storage';
+import {IonicStorageModule} from '@ionic/storage';
+import {SocialSharing} from '@ionic-native/social-sharing';
 
 
 import {PipesModule} from '../pipes/pipes.module';
@@ -90,6 +91,7 @@ import {AuthProvider} from '../providers/auth/auth';
         InAppBrowser,
         AuthProvider,
         NativeStorage,
+        SocialSharing
     ]
 })
 

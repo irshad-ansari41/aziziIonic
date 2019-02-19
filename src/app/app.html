@@ -1,5 +1,5 @@
 <ion-menu [content]="content" class="menu-panel">
-    
+
     <ion-header class="bg-blue">
         <ion-toolbar text-center>
             <img src="http://azizidevelopments.in/uploads/2018/04/app-logo.png" alt="Azizi Developements" class="app-logo">
@@ -12,6 +12,7 @@
                     <ion-icon [name]="p.icon"></ion-icon>
                 {{p.title}}
             </button>
+            <button menuClose ion-item *ngIf="currentUser.id" (click)="logOut()" class="bg-blue text-white"><ion-icon name="logout"></ion-icon>Logout</button>
         </ion-list>
     </ion-content>
 

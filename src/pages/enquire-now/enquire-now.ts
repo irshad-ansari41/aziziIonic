@@ -48,8 +48,6 @@ export class EnquireNowPage {
         ],
         'phone': [
             {type: 'required', message: 'Phone is required.'},
-            {type: 'minLength', message: 'Phone must be at least 8 characters long.'},
-            {type: 'maxLength', message: 'Phone must be at less than 13 characters long.'},
             {type: 'pattern', message: 'Enter a valid phone number.'},
         ],
         'age': [
@@ -101,14 +99,14 @@ export class EnquireNowPage {
             nationality: ['', Validators.required],
             country: ['', Validators.required],
             phone: ['', Validators.compose([
-                Validators.maxLength(12),
                 Validators.minLength(8),
-                //Validators.required,
+                Validators.maxLength(12),
+                Validators.pattern('^[0-9]+$'),
+                Validators.required,
+
             ])],
         });
-
         this.getUserInfo();
-
     }
 
 

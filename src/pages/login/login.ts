@@ -1,10 +1,12 @@
 import {Component} from '@angular/core';
-import {IonicPage, Nav, NavController, NavParams, LoadingController} from 'ionic-angular';
+import {IonicPage, Nav, NavController, NavParams, LoadingController, Events} from 'ionic-angular';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {AuthProvider, User} from '../../providers/auth/auth';
 //import {PropertyProvider} from "../../providers/property/property";
 
 import {HomePage} from '../home/home';
+import {MorePage} from '../more/more';
+import {EnquireNowPage} from '../enquire-now/enquire-now';
 /**
  * Generated class for the LoginPage page.
  *
@@ -34,8 +36,7 @@ export class LoginPage {
     };
 
 
-
-    constructor(public navCtrl: NavController, public navParams: NavParams,
+    constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events,
         private authProvider: AuthProvider,
         private nav: Nav,
         private loadingController: LoadingController,
@@ -56,6 +57,14 @@ export class LoginPage {
         console.log('ionViewDidLoad LoginPage');
     }
 
+    openHomePage() {
+        this.nav.setRoot(HomePage);
+    }
+
+    openMorePage() {
+        this.nav.setRoot(MorePage);
+    }
+
     login() {
         let allPropertyLoadingController = this.loadingController.create({
             content: 'Please wait...'
@@ -65,15 +74,13 @@ export class LoginPage {
             email: this.form.value.email,
             password: this.form.value.password,
         }
+
         this.authProvider.login(user).subscribe((userDetails) => {
-            console.log(userDetails);
-
             localStorage.setItem('User', JSON.stringify(userDetails));
-
             if (userDetails.status == 1) {
                 this.nav.setRoot(HomePage);
+                this.events.publish('user:login', user, Date.now());
             }
-
             allPropertyLoadingController.dismiss();
         });
     }
@@ -81,8 +88,11 @@ export class LoginPage {
     public getUserInfo() {
         let user = JSON.parse(localStorage.getItem('User'));
         if (typeof user !== 'undefined' && user !== null) {
-            this.nav.setRoot(HomePage);
+            if (user.id) {
+                this.nav.setRoot(EnquireNowPage);
+            }
         }
+
     }
 
 }

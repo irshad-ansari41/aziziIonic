@@ -62,7 +62,7 @@
                 <h2>Sync Application</h2>
                 <small>Sync application for offline storage</small>
             </ion-label>
-            <button ion-button color="primary" outline icon-start item-end>
+            <button ion-button color="primary" outline icon-start item-end (click)="syncApp()">
                 <ion-icon name="sync" is-active="false"></ion-icon> Sync
             </button>
         </ion-item>
@@ -73,7 +73,7 @@
                 <h2>Clear Cache</h2>
                 <small>Remove all stored files</small>
             </ion-label>
-            <button ion-button color="danger" outline icon-start item-end>
+            <button ion-button color="danger" outline icon-start item-end (click)="CacheClear()">
                 <ion-icon name="trash" is-active="false"></ion-icon> Clear
             </button>
         </ion-item>
@@ -112,9 +112,9 @@
         <ion-item>
             <ion-icon name="star" item-start></ion-icon>
             <ion-label>
-                <h2>Rate us on playstore</h2>
+                <h2>Rate us on {{store}}</h2>
             </ion-label>
-            <button ion-button color="secondary" outline icon-start item-end>
+            <button ion-button color="secondary" outline icon-start item-end (click)="rateApp()">
                 <ion-icon name="star" is-active="false"></ion-icon> Rating
             </button>
         </ion-item>
@@ -123,7 +123,7 @@
             <ion-label>
                 <h2>Share this app</h2>
             </ion-label>
-            <button ion-button color="secondary" outline icon-start item-end>
+            <button ion-button color="secondary" outline icon-start item-end (click)="shareApp()">
                 <ion-icon name="share" is-active="false"></ion-icon> Share
             </button>
         </ion-item>
