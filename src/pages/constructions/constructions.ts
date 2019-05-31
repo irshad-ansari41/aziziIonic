@@ -51,9 +51,10 @@ export class ConstructionsPage {
         let allPropertiesLoadingController = this.loadingController.create({
             content: Constants.LoadingMsg
         });
+    
         allPropertiesLoadingController.present();
 
-        let key = 'constructions_' + area.slug;
+        let key = 'constructions_' + area.id;
         let retrievedObject = JSON.parse(localStorage.getItem(key));
         if (typeof retrievedObject !== 'undefined' && retrievedObject !== null) {
             this.constructions = retrievedObject;

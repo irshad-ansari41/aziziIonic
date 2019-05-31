@@ -2,17 +2,17 @@
 
     <ion-header class="bg-blue">
         <ion-toolbar text-center>
-            <img src="http://azizidevelopments.in/uploads/2018/04/app-logo.png" alt="Azizi Developements" class="app-logo">
+            <img src="//azizidevelopments.com/assets/images/logo/1512057079483688018.png" alt="Azizi Developements" class="app-logo">
         </ion-toolbar>
     </ion-header>
 
     <ion-content>
         <ion-list>
             <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)" class="bg-blue text-white">
-                    <ion-icon [name]="p.icon"></ion-icon>
-                {{p.title}}
+                <ion-icon [name]="p.icon"></ion-icon>&nbsp;&nbsp;&nbsp; {{p.title}}
             </button>
-            <button menuClose ion-item *ngIf="currentUser.id" (click)="logOut()" class="bg-blue text-white"><ion-icon name="logout"></ion-icon>Logout</button>
+            <button menuClose ion-item *ngIf="currentUser.id" (click)="logOut()" class="bg-blue text-white">
+                <ion-icon name="log-out"></ion-icon>&nbsp;&nbsp;&nbsp;Logout</button>
         </ion-list>
     </ion-content>
 

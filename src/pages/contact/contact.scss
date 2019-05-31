@@ -1,3 +1,10 @@
 page-contact {
 
+    .inputField{
+        padding: 0!important;
+    }
+    .error-message,.required
+    {
+        color: red;
+    }
 }

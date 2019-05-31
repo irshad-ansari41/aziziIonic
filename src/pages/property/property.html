@@ -34,7 +34,7 @@
         <ion-row>
             <button *ngIf="property.brochure" ion-button class="btn-footer" (click)="openPdf(property.brochure)"><ion-col><ion-icon name="document"></ion-icon> Brochure</ion-col></button>
             <button *ngIf="property.floor_plan" ion-button class="btn-footer" (click)="openPdf(property.floor_plan)"><ion-col><ion-icon name="document"></ion-icon> Floorplan</ion-col></button>
-            <button  ion-button class="btn-footer"><ion-col><ion-icon name="images"></ion-icon> Gallery</ion-col></button>
+            <button *ngIf="property.images" ion-button class="btn-footer" (click)="openGallery(property.images)"><ion-col><ion-icon name="images"></ion-icon> Gallery</ion-col></button>
             <button *ngIf="property.video" ion-button class="btn-footer" (click)="openVideoPage(property.video)"><ion-col><ion-icon name="videocam"></ion-icon> Video</ion-col></button>
             <button *ngIf="property.panorama" ion-button class="btn-footer" (click)="open360viewPage(property.panorama)"><ion-col><ion-icon name="photos"></ion-icon> 360°</ion-col></button>
             <button *ngIf="property.latitude" ion-button class="btn-footer" (click)="openMapPage(property.latitude,property.longitude)"><ion-col><ion-icon name="map"></ion-icon> Map</ion-col></button>

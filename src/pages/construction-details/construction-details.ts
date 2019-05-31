@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
-import {IonicPage, Nav, NavController, NavParams, LoadingController} from 'ionic-angular';
+import {IonicPage, Nav, NavController, NavParams, LoadingController, ModalController} from 'ionic-angular';
 import {PropertyProvider} from '../../providers/property/property';
+import {GalleryModal} from 'ionic-gallery-modal';
 
 
 import {HomePage} from '../home/home';
@@ -31,7 +32,9 @@ export class ConstructionDetailsPage {
         public navCtrl: NavController,
         public navParams: NavParams,
         private propertyProvider: PropertyProvider,
-        private loadingController: LoadingController ) {
+        private loadingController: LoadingController,
+        private modalController: ModalController,
+    ) {
     }
 
     openHomePage() {
@@ -42,10 +45,10 @@ export class ConstructionDetailsPage {
         this.nav.setRoot(MorePage);
     }
 
-    
+
 
     ionViewDidLoad() {
-       
+
         let property = this.navParams.get('property');
         this.getConstruction(property);
         console.log('ionViewDidLoad ConstructionDetailsPage');
@@ -68,5 +71,21 @@ export class ConstructionDetailsPage {
             });
         }
     }
+
+    openGallery(images) {
+        let photos = [];
+        for (let i = 0; i < images.length; i++) {
+            photos.push({url: images[i], 'type': 'none'});
+        }
+        console.log(photos);
+        let modal = this.modalController.create(GalleryModal, {
+            photos: photos,
+            closeIcon: 'close',
+            initialSlide: 0,
+        });
+        modal.present();
+    }
+
+
 
 }

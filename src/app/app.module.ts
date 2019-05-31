@@ -1,9 +1,10 @@
-import {BrowserModule} from '@angular/platform-browser';
+import {BrowserModule,HAMMER_GESTURE_CONFIG} from '@angular/platform-browser';
 import {ErrorHandler, NgModule} from '@angular/core';
 import {IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
 import {HttpClientModule} from '@angular/common/http';
 import {ReactiveFormsModule} from '@angular/forms';
 import {IonicSelectableModule} from 'ionic-selectable';
+import * as ionicGalleryModal from 'ionic-gallery-modal';
 
 import {MyApp} from './app.component';
 import {HomePage} from '../pages/home/home';
@@ -26,6 +27,7 @@ import {ConstructionDetailsPageModule} from '../pages/construction-details/const
 import {MapPageModule} from '../pages/map/map.module';
 import {ViewVideoPageModule} from '../pages/view-video/view-video.module';
 import {LoginPageModule} from '../pages/login/login.module';
+import {ContactPageModule} from '../pages/contact/contact.module';
 
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
@@ -41,6 +43,7 @@ import {SocialSharing} from '@ionic-native/social-sharing';
 
 import {PipesModule} from '../pipes/pipes.module';
 import {AuthProvider} from '../providers/auth/auth';
+import {LeadProvider} from '../providers/lead/lead';
 
 @NgModule({
     declarations: [
@@ -55,6 +58,7 @@ import {AuthProvider} from '../providers/auth/auth';
         IonicSelectableModule,
         IonicModule.forRoot(MyApp),
         IonicStorageModule.forRoot(),
+        ionicGalleryModal.GalleryModalModule,
         PipesModule,
         PropertiesPageModule,
         CommunityPageModule,
@@ -72,7 +76,8 @@ import {AuthProvider} from '../providers/auth/auth';
         ConstructionDetailsPageModule,
         MapPageModule,
         ViewVideoPageModule,
-        LoginPageModule
+        LoginPageModule,
+        ContactPageModule
     ],
     bootstrap: [IonicApp],
     entryComponents: [
@@ -84,6 +89,7 @@ import {AuthProvider} from '../providers/auth/auth';
         StatusBar,
         SplashScreen,
         {provide: ErrorHandler, useClass: IonicErrorHandler},
+        {provide: HAMMER_GESTURE_CONFIG, useClass: ionicGalleryModal.GalleryModalHammerConfig},
         PropertyProvider,
         File,
         FileTransfer,
@@ -91,7 +97,8 @@ import {AuthProvider} from '../providers/auth/auth';
         InAppBrowser,
         AuthProvider,
         NativeStorage,
-        SocialSharing
+        SocialSharing,
+        LeadProvider
     ]
 })
 

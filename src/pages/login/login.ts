@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
-import {IonicPage, Nav, NavController, NavParams, LoadingController, Events} from 'ionic-angular';
+import {IonicPage, Nav, NavController, NavParams, LoadingController, Events, ToastController} from 'ionic-angular';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
-import {AuthProvider, User} from '../../providers/auth/auth';
+import {AuthProvider} from '../../providers/auth/auth';
+import {User} from '../../class/user'
 //import {PropertyProvider} from "../../providers/property/property";
 
 import {HomePage} from '../home/home';
@@ -21,7 +22,7 @@ import {EnquireNowPage} from '../enquire-now/enquire-now';
 })
 export class LoginPage {
     private form: FormGroup;
-    loginError: string;
+    loginError: string='';
 
     validation_messages = {
         'email': [
@@ -40,6 +41,7 @@ export class LoginPage {
         private authProvider: AuthProvider,
         private nav: Nav,
         private loadingController: LoadingController,
+        private toastController: ToastController,
         private formBuilder: FormBuilder) {
         this.form = this.formBuilder.group({
             email: ['', Validators.compose([
@@ -50,7 +52,6 @@ export class LoginPage {
 
         });
         this.getUserInfo();
-
     }
 
     ionViewDidLoad() {
@@ -77,10 +78,20 @@ export class LoginPage {
 
         this.authProvider.login(user).subscribe((userDetails) => {
             localStorage.setItem('User', JSON.stringify(userDetails));
+
+            console.log(userDetails);
+
             if (userDetails.status == 1) {
-                this.nav.setRoot(HomePage);
+                //setTimeout(function () {
+                this.presentToast();
+                this.nav.setRoot(EnquireNowPage);
                 this.events.publish('user:login', user, Date.now());
+                //}, 3000);
+            }else if (userDetails.status == 0) {
+               this.loginError =  userDetails.error;
             }
+
+
             allPropertyLoadingController.dismiss();
         });
     }
@@ -93,6 +104,13 @@ export class LoginPage {
             }
         }
 
+    }
+    presentToast() {
+        const toast = this.toastController.create({
+            message: 'Your are logged in successfully',
+            duration: 3000
+        });
+        toast.present();
     }
 
 }

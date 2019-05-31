@@ -94,7 +94,7 @@
                 <h2>View on Web</h2>
                 <small>You can access App on browser</small>
             </ion-label>
-            <button ion-button color="primary" outline icon-start item-end>
+            <button ion-button color="primary" outline icon-start item-end (click)="viewOnWeb()">
                 <ion-icon name="open" is-active="false"></ion-icon> Web
             </button>
         </ion-item>
@@ -121,7 +121,7 @@
         <ion-item>
             <ion-icon name="share" item-start></ion-icon>
             <ion-label>
-                <h2>Share this app</h2>
+                <h2>Share this App</h2>
             </ion-label>
             <button ion-button color="secondary" outline icon-start item-end (click)="shareApp()">
                 <ion-icon name="share" is-active="false"></ion-icon> Share
@@ -132,7 +132,7 @@
             <ion-label>
                 <h2>Contact Us</h2>
             </ion-label>
-            <button ion-button color="secondary" outline icon-start item-end>
+            <button ion-button color="secondary" outline icon-start item-end (click)="openContactPage()">
                 <ion-icon name="mail-open" is-active="false"></ion-icon> Contact
             </button>
         </ion-item>

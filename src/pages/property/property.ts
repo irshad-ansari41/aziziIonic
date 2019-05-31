@@ -1,7 +1,9 @@
 import {Component, ViewChild, ElementRef} from '@angular/core';
-import {IonicPage, Nav, NavController, NavParams, Platform, LoadingController} from 'ionic-angular';
+import {IonicPage, Nav, NavController, NavParams, Platform, LoadingController, ModalController} from 'ionic-angular';
 import {PropertyProvider, Property} from '../../providers/property/property';
 import {InAppBrowser} from '@ionic-native/in-app-browser';
+import {GalleryModal} from 'ionic-gallery-modal';
+
 //import {DomSanitizer} from '@angular/platform-browser';
 
 import {File} from '@ionic-native/file';
@@ -53,6 +55,7 @@ export class PropertyPage {
         private file: File,
         private transfer: FileTransfer,
         private loadingController: LoadingController,
+        private modalController: ModalController,
         private iab: InAppBrowser,
         //private sanitizer: DomSanitizer
     ) {
@@ -149,6 +152,20 @@ export class PropertyPage {
             let url = entry.toURL();
             this.document.viewDocument(url, 'application/pdf', {});
         });
+    }
+
+    openGallery(images) {
+        let photos = [];
+        for (let i = 0; i < images.length; i++) {
+            photos.push({url: images[i], 'type': 'none'});
+        }
+        console.log(photos);
+        let modal = this.modalController.create(GalleryModal, {
+            photos: photos,
+            closeIcon: 'close',
+            initialSlide: 0,
+        });
+        modal.present();
     }
 
 

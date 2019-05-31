@@ -1,14 +1,16 @@
-import {Component} from '@angular/core';
-import {IonicPage, Nav, NavController, NavParams, LoadingController} from 'ionic-angular';
-import {FormGroup, FormBuilder, Validators} from '@angular/forms';
-import {IonicSelectableComponent} from 'ionic-selectable';
+import { Component } from '@angular/core';
+import { IonicPage, Nav, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { IonicSelectableComponent } from 'ionic-selectable';
 
-import {HomePage} from '../home/home';
-import {MorePage} from '../more/more';
-import {LoginPage} from '../login/login';
+import { HomePage } from '../home/home';
+import { MorePage } from '../more/more';
+import { LoginPage } from '../login/login';
 
-import {PropertyProvider} from "../../providers/property/property";
-import {AuthProvider, Lead, User} from "../../providers/auth/auth";
+import { PropertyProvider } from "../../providers/property/property";
+import { LeadProvider } from "../../providers/lead/lead";
+import { Lead } from "../../class/lead";
+import { User } from "../../class/user";
 
 /**
  * Generated class for the EnquireNowPage page.
@@ -27,7 +29,8 @@ export class EnquireNowPage {
 
     private form: FormGroup;
     public name: string = '';
-    public currentUser: User = {id: 0, first_name: '', last_name: '', email: '', password: '', status: 0};
+    public leadCount: number;
+    public currentUser: User = { id: 0, first_name: '', last_name: '', email: '', password: '', status: 0 };
     public userId: number = 0;
     public ages: any = [];
     public sources: any = [];
@@ -37,36 +40,33 @@ export class EnquireNowPage {
     validation_messages = {
 
         'name': [
-            {type: 'required', message: 'Name is required.'}
+            { type: 'required', message: 'Name is required.' }
         ],
         'email': [
-            {type: 'required', message: 'Email is required.'},
-            {type: 'pattern', message: 'Enter a valid email.'}
+            { type: 'required', message: 'Email is required.' },
+            { type: 'pattern', message: 'Enter a valid email.' }
         ],
-        'stay': [
-            {type: 'required', message: 'Name is required.'}
+        'city': [
+            { type: 'required', message: 'City is required.' }
         ],
-        'phone': [
-            {type: 'required', message: 'Phone is required.'},
-            {type: 'pattern', message: 'Enter a valid phone number.'},
+        'mobile': [
+            { type: 'required', message: 'Phone is required.' },
+            { type: 'pattern', message: 'Enter a valid mobile number.' },
+            { type: 'minlength', message: 'Minimum 7 digit required.' },
+            { type: 'maxlength', message: 'Maximum 10 digit required.' },
         ],
-        'age': [
-            {type: 'required', message: 'Name is required.'}
-        ],
+
         'nationality': [
-            {type: 'required', message: 'Name is required.'}
+            { type: 'required', message: 'Nationality is required.' }
         ],
         'country_code': [
-            {type: 'required', message: 'Name is required.'}
+            { type: 'required', message: 'Country code is required.' }
         ],
         'country': [
-            {type: 'required', message: 'Name is required.'}
-        ],
-        'gender': [
-            {type: 'required', message: 'Name is required.'}
+            { type: 'required', message: 'Country is required.' }
         ],
         'source': [
-            {type: 'required', message: 'Name is required.'}
+            { type: 'required', message: 'Source is required.' }
         ],
 
     };
@@ -75,12 +75,13 @@ export class EnquireNowPage {
         public navParams: NavParams,
         public nav: Nav,
         private propertyProvider: PropertyProvider,
-        private authProvider: AuthProvider,
+        private leadProvider: LeadProvider,
         private loadingController: LoadingController,
+        private toastController: ToastController,
         private formBuilder: FormBuilder) {
 
-        this.sources = ['Airport', 'La Mer', 'City Walk', 'Other'];
-
+        this.getLeadCount();
+        this.getLeadSource();
 
         this.form = this.formBuilder.group({
             name: ['', Validators.compose([
@@ -93,14 +94,19 @@ export class EnquireNowPage {
             )],
             gender: [''],
             age: [''],
+            uae_residence: [''],
+            kiosk: [1,],
+            user_id: ['',],
+            promoter: ['',],
+            manager: ['Hanna'],
             source: ['', Validators.required],
-            stay: [''],
+            city: [''],
             country_code: ['', Validators.required],
             nationality: ['', Validators.required],
             country: ['', Validators.required],
-            phone: ['', Validators.compose([
-                Validators.minLength(8),
-                Validators.maxLength(12),
+            mobile: ['', Validators.compose([
+                Validators.minLength(7),
+                Validators.maxLength(10),
                 Validators.pattern('^[0-9]+$'),
                 Validators.required,
 
@@ -122,22 +128,33 @@ export class EnquireNowPage {
         let allPropertyLoadingController = this.loadingController.create({
             content: 'Sending...'
         });
+
         allPropertyLoadingController.present();
         let lead: Lead = {
             name: this.form.value.name,
             email: this.form.value.email,
-            stay: this.form.value.stay,
+            city: this.form.value.city,
             nationality: this.form.value.nationality.name,
             country: this.form.value.country.name,
             country_code: this.form.value.country_code.code,
-            phone: this.form.value.phone,
+            mobile: this.form.value.mobile,
             gender: this.form.value.gender,
-            age: this.form.value.age,
+            age: this.form.value.age.age,
+            uae_residence: this.form.value.uae_residence,
             source: this.form.value.source,
             user_id: this.currentUser.id,
+            kiosk: this.form.value.kiosk,
+            promoter: this.currentUser.first_name + ' ' + this.currentUser.last_name,
+            manager: this.form.value.manager,
         }
-        this.authProvider.createLead(lead).subscribe((newProduct) => {
-            console.log(newProduct);
+        console.log(lead);
+        this.leadProvider.createLead(lead).subscribe((res) => {
+            console.log(res);
+            if (res.status == 'success') {
+                this.form.reset()
+                this.presentToast();
+            }
+            this.getLeadCount();
             allPropertyLoadingController.dismiss();
         });
     }
@@ -158,17 +175,37 @@ export class EnquireNowPage {
         component: IonicSelectableComponent,
         value: any
     }) {
-        console.log('port:', event.value);
+        //console.log('port:', event.value);
     }
 
     ionViewDidLoad() {
-        this.propertyProvider.getCountries().subscribe((countires) => {
+        this.leadProvider.getCountries().subscribe((countires) => {
             this.countries = countires;
         });
-        this.propertyProvider.getAges().subscribe((ages) => {
+        this.leadProvider.getAges().subscribe((ages) => {
             this.ages = ages;
         });
         console.log('ionViewDidLoad EnquireNowPage');
+    }
+
+    presentToast() {
+        const toast = this.toastController.create({
+            message: 'Request has been sent successfully',
+            duration: 5000
+        });
+        toast.present();
+    }
+
+    getLeadCount(){
+        this.leadProvider.getLeadCount().subscribe((count:number)=>{
+            this.leadCount =count;
+        });
+    }
+    getLeadSource(){
+        this.leadProvider.getLeadSource().subscribe((sources:any)=>{
+            this.sources =sources;
+            console.log(sources);
+        });
     }
 
 }

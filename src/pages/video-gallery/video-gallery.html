@@ -21,15 +21,15 @@
     </ion-navbar>
 
     <ion-toolbar no-border-top>
-        <ion-segment [(ngModel)]="pet">
-            <ion-segment-button value="Commercial">
+        <ion-segment [(ngModel)]="pet" >
+            <ion-segment-button value="Commercial" class='text-white'>
                 Commercial
             </ion-segment-button>
-            <ion-segment-button value="Corporate">
+            <ion-segment-button value="Corporate" class='text-white'>
                 Corporate
             </ion-segment-button>
-            <ion-segment-button value="Event">
-                Event
+            <ion-segment-button value="Events" class='text-white'>
+                Events
             </ion-segment-button>
         </ion-segment>
     </ion-toolbar>
@@ -86,10 +86,10 @@
 
         </ion-list>
 
-        <ion-list *ngSwitchCase="'Event'">
+        <ion-list *ngSwitchCase="'Events'">
             
             <ion-row>
-                <ion-col col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3  *ngFor="let g of galleries.Event|keys">
+                <ion-col col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3  *ngFor="let g of galleries.Events|keys">
                     <ion-card>
                         <div class="videoWrapper">
                             <iframe [src]="generateVideoUrl(g.value.video_id)" frameborder="0" allow="accelerometer; loop; encrypted-media; gyroscope; picture-in-picture" allowfullscreen border="0" style="border:0"></iframe>

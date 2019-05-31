@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {IonicPage, Nav, NavController, NavParams, Platform, LoadingController} from 'ionic-angular';
 import {File} from '@ionic-native/file';
 import {DocumentViewer, DocumentViewerOptions} from '@ionic-native/document-viewer';
-import {FileTransfer, FileUploadOptions, FileTransferObject} from '@ionic-native/file-transfer';
+import {FileTransfer, FileTransferObject} from '@ionic-native/file-transfer';
 
 import {InAppBrowser} from '@ionic-native/in-app-browser';
 //import {NativeStorage} from '@ionic-native/native-storage/ngx';
@@ -119,8 +119,9 @@ export class FloorplansPage {
         const fileTransfer: FileTransferObject = this.transfer.create();
         fileTransfer.download(fileUrl, path + filenName).then((entry) => {
             console.log('download complete: ' + entry.toURL());
+            this.openLocalPdf(fileUrl);
         }, (error) => {
-            // handle error
+            console.log(error);
         });
 
 

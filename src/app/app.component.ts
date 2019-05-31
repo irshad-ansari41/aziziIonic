@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {Nav, Platform, Events} from 'ionic-angular';
+import {Nav, Platform, Events,AlertController} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 
@@ -27,7 +27,12 @@ export class MyApp {
 
     pages: Array<{title: string, component: any, icon: string}>;
 
-    constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public events: Events) {
+    constructor(
+        public platform: Platform, 
+        public statusBar: StatusBar, 
+        public splashScreen: SplashScreen, 
+        private alertCtrl: AlertController,
+        public events: Events) {
         this.initializeApp();
         this.getUserInfo();
 
@@ -77,9 +82,29 @@ export class MyApp {
             this.currentUser = user;
         }
     }
-    public logOut() {
-        localStorage.setItem('User', JSON.stringify({id: 0, first_name: '', last_name: '', email: '', password: '', status: 0}));
-        this.nav.setRoot(HomePage);
-        location.reload();
+    
+
+    logOut() {
+        const confirm = this.alertCtrl.create({
+            title: 'Logout Confirmation',
+            message: 'Are you sure you want to logout?',
+            buttons: [
+                {
+                    text: 'Cancel',
+                    handler: () => {
+                        console.log('Cancel');
+                    }
+                },
+                {
+                    text: 'Yes',
+                    handler: () => {
+                        localStorage.setItem('User', JSON.stringify({id: 0, first_name: '', last_name: '', email: '', password: '', status: 0}));
+                        this.nav.setRoot(HomePage);
+                        location.reload();
+                    }
+                }
+            ]
+        });
+        confirm.present();
     }
 }

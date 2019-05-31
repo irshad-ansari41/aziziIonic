@@ -64,8 +64,8 @@
             <div id="demo-test-gallery" class="demo-gallery gallerymain">
                 <div class="row blog-pageview">
                     <ion-row>
-                        <ion-col col-6 col-sm-4 col-md-3 col-lg-3 *ngFor="let image of construction.images">
-                                 <img  [src]="image"  alt="" data-old_url=""  />
+                        <ion-col col-6 col-sm-4 col-md-3 col-lg-3 *ngFor="let image of construction.images;">
+                                 <img  [src]="image"  alt="" data-old_url="" (click)="openGallery(construction.images)"  />
                         </ion-col>
                     </ion-row>
                 </div>

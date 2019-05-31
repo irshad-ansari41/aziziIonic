@@ -4,6 +4,7 @@ import {InAppBrowser} from '@ionic-native/in-app-browser';
 import {SocialSharing} from '@ionic-native/social-sharing';
 
 import {HomePage} from '../home/home';
+import {ContactPage} from '../contact/contact';
 //import {Constants} from '../../enum';
 
 /**
@@ -55,11 +56,11 @@ export class MorePage {
         // we wouldn't want the back button to show in this scenario
         this.nav.setRoot(MorePage);
     }
-    
+
     openContactPage() {
         // Reset the content nav to have just this page
         // we wouldn't want the back button to show in this scenario
-        this.nav.setRoot(MorePage);
+        this.navCtrl.push(ContactPage);
     }
 
     ionViewDidLoad() {
@@ -113,25 +114,52 @@ export class MorePage {
     }
 
     rateApp() {
-        if (this.platform.is('ios')) {
-            let browser = this.iab.create("https://itunes.apple.com/us/app/azizi-developments/id1287021117?ls=1&mt=8");
-            browser.close();
-        }
-        if (this.platform.is('android')) {
-            let browser = this.iab.create("https://play.google.com/store/apps/details?id=com.azizi.developments");
-            browser.close();
-        }
+        const confirm = this.alertCtrl.create({
+            title: 'Rate Confirmation',
+            message: 'Are you sure you want to rate us?',
+            buttons: [
+                {
+                    text: 'Cancel',
+                    handler: () => {
+                        console.log('Cancel');
+                    }
+                },
+                {
+                    text: 'Yes',
+                    handler: () => {
+                        let browser = this.iab.create(this.storeUrl);
+                        browser.close();
+                    }
+                }
+            ]
+        });
+        confirm.present();
     }
-    
+
     syncApp() {
-        if (this.platform.is('ios')) {
-            let browser = this.iab.create("https://itunes.apple.com/us/app/azizi-developments/id1287021117?ls=1&mt=8");
-            browser.close();
-        }
-        if (this.platform.is('android')) {
-            let browser = this.iab.create("https://play.google.com/store/apps/details?id=com.azizi.developments");
-            browser.close();
-        }
+        console.log('Sync App...');
+    }
+
+    viewOnWeb() {
+        const confirm = this.alertCtrl.create({
+            title: 'Open Confirmation',
+            message: 'Are you sure you want to open in browser?',
+            buttons: [
+                {
+                    text: 'Cancel',
+                    handler: () => {
+                    }
+                },
+                {
+                    text: 'Yes',
+                    handler: () => {
+                        let browser = this.iab.create("http://azizidevelopments.in/azizidevelopments/");
+                        browser.close();
+                    }
+                }
+            ]
+        });
+        confirm.present();
     }
 
 }
