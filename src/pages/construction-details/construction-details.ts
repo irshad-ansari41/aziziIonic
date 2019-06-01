@@ -7,7 +7,7 @@ import {GalleryModal} from 'ionic-gallery-modal';
 import {HomePage} from '../home/home';
 import {MorePage} from '../more/more';
 
-import {Constants} from '../../enum';
+import {environment as ENV} from '../../environment';
 
 /**
  * Generated class for the ConstructionDetailsPage page.
@@ -56,7 +56,7 @@ export class ConstructionDetailsPage {
 
     getConstruction(property: any) {
         let allPropertyLoadingController = this.loadingController.create({
-            content: Constants.LoadingMsg
+            content: ENV.LoadingMsg
         });
         allPropertyLoadingController.present();
         let retrievedObject = JSON.parse(localStorage.getItem('construction_' + property.id));

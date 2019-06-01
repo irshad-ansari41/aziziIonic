@@ -6,7 +6,6 @@ import {IonicSelectableComponent} from 'ionic-selectable';
 import {HomePage} from '../home/home';
 import {MorePage} from '../more/more';
 
-import {PropertyProvider} from "../../providers/property/property";
 import {LeadProvider} from "../../providers/lead/lead";
 import {Contact} from "../../class/contact";
 /**
@@ -54,7 +53,6 @@ export class ContactPage {
     constructor(public navCtrl: NavController,
         public navParams: NavParams,
         public nav: Nav,
-        private propertyProvider: PropertyProvider,
         private leadProvider: LeadProvider,
         private loadingController: LoadingController,
         private toastController: ToastController,
@@ -85,7 +83,7 @@ export class ContactPage {
     }
 
     ionViewDidLoad() {
-        this.propertyProvider.getCountries().subscribe((countires) => {
+        this.leadProvider.getCountries().subscribe((countires) => {
             this.countries = countires;
         });
         console.log('ionViewDidLoad ContactPage');

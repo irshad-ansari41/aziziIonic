@@ -1,22 +1,22 @@
-import {Component, ViewChild, ElementRef} from '@angular/core';
-import {IonicPage, Nav, NavController, NavParams, Platform, LoadingController, ModalController} from 'ionic-angular';
-import {PropertyProvider, Property} from '../../providers/property/property';
-import {InAppBrowser} from '@ionic-native/in-app-browser';
-import {GalleryModal} from 'ionic-gallery-modal';
+import { Component, ViewChild, ElementRef } from '@angular/core';
+import { IonicPage, Nav, NavController, NavParams, Platform, LoadingController, ModalController } from 'ionic-angular';
+import { PropertyProvider, Property } from '../../providers/property/property';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { GalleryModal } from 'ionic-gallery-modal';
 
 //import {DomSanitizer} from '@angular/platform-browser';
 
-import {File} from '@ionic-native/file';
-import {DocumentViewer, DocumentViewerOptions} from '@ionic-native/document-viewer';
-import {FileTransfer} from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
+import { DocumentViewer, DocumentViewerOptions } from '@ionic-native/document-viewer';
+import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
 
-import {HomePage} from '../home/home';
-import {MorePage} from '../more/more';
-import {MapPage} from '../map/map';
-import {ConstructionDetailsPage} from '../construction-details/construction-details';
-import {ViewVideoPage} from '../view-video/view-video';
+import { HomePage } from '../home/home';
+import { MorePage } from '../more/more';
+import { MapPage } from '../map/map';
+import { ConstructionDetailsPage } from '../construction-details/construction-details';
+import { ViewVideoPage } from '../view-video/view-video';
 
-import {Constants} from '../../enum';
+import { environment as ENV } from '../../environment';
 
 /**
  * Generated class for the PropertyPage page.
@@ -34,6 +34,7 @@ export class PropertyPage {
 
     @ViewChild('map') mapElement: ElementRef;
     map: any;
+    downloadFile: string = '';
 
 
     public property: object = [];
@@ -59,6 +60,8 @@ export class PropertyPage {
         private iab: InAppBrowser,
         //private sanitizer: DomSanitizer
     ) {
+
+
     }
 
     openHomePage() {
@@ -70,31 +73,16 @@ export class PropertyPage {
     }
 
     openMapPage(lat: number, lng: number) {
-        this.navCtrl.push(MapPage, {lat: lat, lng: lng});
+        this.navCtrl.push(MapPage, { lat: lat, lng: lng });
     }
 
     openVideoPage(url: string) {
-        this.navCtrl.push(ViewVideoPage, {url: url});
+        this.navCtrl.push(ViewVideoPage, { url: url });
     }
 
     openConstructionUpdatePage(constructionId: number) {
-        this.navCtrl.push(ConstructionDetailsPage, {constructionId: constructionId, });
+        this.navCtrl.push(ConstructionDetailsPage, { constructionId: constructionId, });
     }
-
-    open360viewPage(url: string, ) {
-        let browser = this.iab.create(url);
-
-        //browser.executeScript('')
-
-        //browser.insertCSS(...);
-
-        //browser.on('loadstop').subscribe(event => {
-        //    browser.insertCSS({code: "body{color: red;"});
-        //});
-
-        browser.close();
-    }
-
 
     ionViewDidLoad() {
         let property = this.navParams.get('property');
@@ -102,10 +90,9 @@ export class PropertyPage {
         console.log('ionViewDidLoad PropertyPage');
     }
 
-
     getProperty(property: Property) {
         let allPropertyLoadingController = this.loadingController.create({
-            content: Constants.LoadingMsg
+            content: ENV.LoadingMsg
         });
         allPropertyLoadingController.present();
 
@@ -123,41 +110,20 @@ export class PropertyPage {
         }
     }
 
+    open360viewPage(url: string, ) {
+        let browser = this.iab.create(url);
+        browser.close();
+    }
+
     openPdf(url: string) {
         let browser = this.iab.create(url);
         browser.close();
     }
 
-    openLocalPdf() {
-        const options: DocumentViewerOptions = {
-            title: 'My PDF'
-        }
-        this.document.viewDocument('assets/5-tools.pdf', 'application/pdf', options);
-    }
-
-    downloadAndOpenPdf(pdfUrl: string) {
-
-        let urlSegment = pdfUrl.split('/');
-        let filenName = urlSegment[urlSegment.length - 1];
-        let path = null;
-
-        if (this.platform.is('ios')) {
-            path = this.file.documentsDirectory;
-        } else if (this.platform.is('android')) {
-            path = this.file.dataDirectory;
-        }
-
-        const transfer = this.transfer.create();
-        transfer.download(pdfUrl, path + filenName).then(entry => {
-            let url = entry.toURL();
-            this.document.viewDocument(url, 'application/pdf', {});
-        });
-    }
-
     openGallery(images) {
         let photos = [];
         for (let i = 0; i < images.length; i++) {
-            photos.push({url: images[i], 'type': 'none'});
+            photos.push({ url: images[i], 'type': 'none' });
         }
         console.log(photos);
         let modal = this.modalController.create(GalleryModal, {
@@ -168,6 +134,92 @@ export class PropertyPage {
         modal.present();
     }
 
+    openLocalPdf(fileUrl: string) {
+
+        this.downloadFile = fileUrl;
+        let urlSegment = fileUrl.split('/');
+        let filenName = urlSegment[urlSegment.length - 1].replace(/ /g, '-');
+        let path = null;
+
+        if (this.platform.is('ios')) {
+            path = this.file.documentsDirectory;
+        } else if (this.platform.is('android')) {
+            path = this.file.dataDirectory;
+        } else if (this.platform.is('core') || this.platform.is('mobileweb')) {
+            this.openPdf(fileUrl);
+            return;
+        }
+
+        this.file.checkFile(path, filenName).then(
+            (files) => {
+                //console.log("files found" + files);
+                const options: DocumentViewerOptions = {
+                    title: filenName
+                }
+                this.document.viewDocument(path + filenName, 'application/pdf', options, this.onShow, this.onClose, this.onMissingApp, this.onError);
+            }
+        ).catch(
+            (err) => {
+                console.log("files not found in device, Please download fist time.", err);
+                alert("File not found in device, Please download fist time.");
+                this.downloadAndOpenPdf(this.downloadFile);
+            }
+        );
+
+    }
 
 
+    downloadAndOpenPdf(fileUrl: string) {
+        let allPropertyLoadingController = this.loadingController.create({
+            content: ENV.LoadingMsg
+        });
+        allPropertyLoadingController.present();
+
+        let urlSegment = fileUrl.split('/');
+        let filenName = urlSegment[urlSegment.length - 1].replace(/ /g, '-');
+        let path = null;
+
+        if (this.platform.is('ios')) {
+            path = this.file.documentsDirectory;
+        } else if (this.platform.is('android')) {
+            path = this.file.dataDirectory;
+        }
+        console.log(path + filenName);
+
+        const fileTransfer: FileTransferObject = this.transfer.create();
+        fileTransfer.download(fileUrl, path + filenName).then((entry) => {
+            console.log('download complete: ' + entry.toURL());
+            allPropertyLoadingController.dismiss();
+            this.openLocalPdf(fileUrl);
+        }, (error) => {
+            console.log(error);
+        });
+    }
+
+    onPossible() {
+        console.log('document can be shown');
+    }
+
+    onMissingApp(appId, installer) {
+        if (confirm("Please install the free PDF Viewer App "
+            + appId + " for Android?")) {
+            installer();
+        }
+    }
+
+    onImpossible() {
+        console.log('document cannot be shown');
+    }
+
+    onError(error) {
+        console.log('document shown', error);
+    }
+
+    onShow() {
+        console.log('document shown');
+    }
+
+    onClose() {
+        console.log('document closed');
+    }
 }

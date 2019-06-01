@@ -7,7 +7,7 @@ import {ConstructionsPage} from '../constructions/constructions';
 import {HomePage} from '../home/home';
 import {MorePage} from '../more/more';
 
-import {Constants} from '../../enum';
+import {environment as ENV} from '../../environment';
 /**
  * Generated class for the CommunityPage page.
  *
@@ -59,7 +59,7 @@ export class CommunityPage {
 
     getPropertyCommunities(area: any) {
         let allPropertiesLoadingController = this.loadingController.create({
-            content: Constants.LoadingMsg
+            content: ENV.LoadingMsg
         });
         allPropertiesLoadingController.present();
 
@@ -79,7 +79,7 @@ export class CommunityPage {
 
     getConstructionCommunities(area: any) {
         let allPropertiesLoadingController = this.loadingController.create({
-            content: Constants.LoadingMsg
+            content: ENV.LoadingMsg
         });
         allPropertiesLoadingController.present();
 

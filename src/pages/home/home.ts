@@ -5,7 +5,7 @@ import {PropertyProvider, Area} from '../../providers/property/property';
 import {PropertiesPage} from '../properties/properties';
 import {CommunityPage} from '../community/community';
 import {MorePage} from '../more/more';
-import {Constants} from '../../enum';
+import {environment as ENV} from '../../environment';
 
 @Component({
     selector: 'page-home',
@@ -21,7 +21,7 @@ export class HomePage {
 
     getProjects() {
         let allAreasLoadingController = this.loadingController.create({
-            content: Constants.LoadingMsg
+            content: ENV.LoadingMsg
         });
         allAreasLoadingController.present();
 

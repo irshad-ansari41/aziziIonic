@@ -5,7 +5,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import { Lead } from '../../class/lead';
 import { Contact } from '../../class/contact';
-
+import {environment as ENV} from '../../environment';
 
 /*
   Generated class for the LeadProvider provider.
@@ -14,7 +14,6 @@ import { Contact } from '../../class/contact';
   and Angular DI.
 */
 
-const API_BASE_URL: string = "https://azizidevelopments.com/api";
 
 @Injectable()
 export class LeadProvider {
@@ -29,7 +28,7 @@ export class LeadProvider {
     headers = headers.set('Accept', 'text/javascript');
 
     return this.httpClient
-      .post(API_BASE_URL + '/create-lead', lead)
+      .post(ENV.BASE_URL + '/create-lead', lead)
       .map((response) => {
         return response;
       });
@@ -40,7 +39,7 @@ export class LeadProvider {
   public createContact(contact: Contact): any {
 
     return this.httpClient
-      .post(API_BASE_URL + '/create-contact', contact)
+      .post(ENV.BASE_URL + '/create-contact', contact)
       .map(response => {
         return response;
       });
@@ -48,16 +47,16 @@ export class LeadProvider {
   }
 
   getLeadCount() {
-    return this.httpClient.get(API_BASE_URL + '/count-lead');
+    return this.httpClient.get(ENV.BASE_URL + '/count-lead');
   }
 
   getLeadSource() {
-    return this.httpClient.get(API_BASE_URL + '/get-kiosk-source');
+    return this.httpClient.get(ENV.BASE_URL + '/get-kiosk-source');
   }
 
 
   getCountries() {
-    return this.httpClient.get(API_BASE_URL + '/get-countries');
+    return this.httpClient.get(ENV.BASE_URL + '/get-countries');
   }
 
   getAges() {

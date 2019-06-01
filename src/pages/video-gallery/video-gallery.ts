@@ -5,7 +5,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {PropertyProvider} from '../../providers/property/property';
 import {HomePage} from '../home/home';
 import {MorePage} from '../more/more';
-import {Constants} from '../../enum';
+import {environment as ENV} from '../../environment';
  
 /**
  * Generated class for the VideoGalleryPage page.
@@ -48,7 +48,7 @@ export class VideoGalleryPage {
 
     getVideoGalleries() {
         let allGalleriesLoadingController = this.loadingController.create({
-            content: Constants.LoadingMsg
+            content: ENV.LoadingMsg
         });
         allGalleriesLoadingController.present();
 

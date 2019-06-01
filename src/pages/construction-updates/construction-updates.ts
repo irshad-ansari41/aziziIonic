@@ -7,7 +7,7 @@ import {MorePage} from '../more/more';
 import {ConstructionsPage} from '../constructions/constructions';
 import {CommunityPage} from '../community/community';
 
-import {Constants} from '../../enum';
+import {environment as ENV} from '../../environment';
 
 /**
  * Generated class for the ConstructionUpdatesPage page.
@@ -55,7 +55,7 @@ export class ConstructionUpdatesPage {
 
     getProjects() {
         let allAreasLoadingController = this.loadingController.create({
-            content: Constants.LoadingMsg
+            content: ENV.LoadingMsg
         });
         allAreasLoadingController.present();
 

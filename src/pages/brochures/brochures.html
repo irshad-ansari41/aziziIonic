@@ -32,11 +32,8 @@
                 <div class="tab-content">
                     <ion-item *ngFor="let brochure of project.value" >
                         {{ brochure.name }}
-                        <button ion-button outline item-end icon-start (click)="openPdf(brochure.file)">
-                            <ion-icon name="open"></ion-icon>
-                        </button>
-                        <button ion-button outline item-end icon-start (click)="downloadAndOpenPdf(brochure.file)">
-                                <ion-icon name="download"></ion-icon>
+                        <button ion-button outline item-end icon-start (click)="openLocalPdf(brochure.file)">
+                            <ion-icon name="open"></ion-icon> Open
                         </button>
                     </ion-item>
                 </div>

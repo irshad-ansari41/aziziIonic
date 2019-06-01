@@ -7,7 +7,6 @@ import { HomePage } from '../home/home';
 import { MorePage } from '../more/more';
 import { LoginPage } from '../login/login';
 
-import { PropertyProvider } from "../../providers/property/property";
 import { LeadProvider } from "../../providers/lead/lead";
 import { Lead } from "../../class/lead";
 import { User } from "../../class/user";
@@ -74,7 +73,6 @@ export class EnquireNowPage {
     constructor(public navCtrl: NavController,
         public navParams: NavParams,
         public nav: Nav,
-        private propertyProvider: PropertyProvider,
         private leadProvider: LeadProvider,
         private loadingController: LoadingController,
         private toastController: ToastController,

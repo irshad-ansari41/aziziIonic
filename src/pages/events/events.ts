@@ -7,7 +7,7 @@ import {HomePage} from '../home/home';
 import {MorePage} from '../more/more';
 import {EventDetailsPage} from '../event-details/event-details';
 
-import {Constants} from '../../enum';
+import {environment as ENV} from '../../environment';
 
 /**
  * Generated class for the EventsPage page.
@@ -49,7 +49,7 @@ export class EventsPage {
 
     getEvents() {
         let allEventsLoadingController = this.loadingController.create({
-            content: Constants.LoadingMsg
+            content: ENV.LoadingMsg
         });
         allEventsLoadingController.present();
 

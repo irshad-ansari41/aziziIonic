@@ -13,17 +13,17 @@
         <ion-title>{{construction.name}}</ion-title>
         <ion-buttons end>
             <button ion-button (click)="openHomePage()">
-                    <ion-icon name="home"></ion-icon>
+                <ion-icon name="home"></ion-icon>
             </button>
             <button ion-button (click)="openMorePage()">
-                    <ion-icon name="more"></ion-icon>
+                <ion-icon name="more"></ion-icon>
             </button>
         </ion-buttons>
     </ion-navbar>
 </ion-header>
 
 
-<ion-content padding> 
+<ion-content padding>
     <!--ion-row>
         <ion-col>
             <div class="heading">{{construction.name}}</div>
@@ -65,18 +65,24 @@
                 <div class="row blog-pageview">
                     <ion-row>
                         <ion-col col-6 col-sm-4 col-md-3 col-lg-3 *ngFor="let image of construction.images;">
-                                 <img  [src]="image"  alt="" data-old_url="" (click)="openGallery(construction.images)"  />
+                            <img [src]="image" alt="{{construction.name}}" (click)="openGallery(construction.images)" />
+                            <!--<ionic-image-cache [src]="image" alt="{{construction.name}}" (tap)="openGallery(construction.images)"></ionic-image-cache>-->
                         </ion-col>
                     </ion-row>
                 </div>
             </div>
-
         </ion-col>
     </ion-row>
 
     <ion-row>
         <ion-col>
-            <table *ngIf="construction.finish_at" class="deliveryDate"><tr><td>Delivery Date</td><td class="txt-right">{{construction.finish_at}}</td></tr></tbody></table>
+            <table *ngIf="construction.finish_at" class="deliveryDate">
+                <tr>
+                    <td>Delivery Date</td>
+                    <td class="txt-right">{{construction.finish_at}}</td>
+                </tr>
+                </tbody>
+            </table>
             <div *ngIf="construction.updated_at" class="lastUpdate">Last Updated: {{construction.updated_at}}</div>
         </ion-col>
     </ion-row>

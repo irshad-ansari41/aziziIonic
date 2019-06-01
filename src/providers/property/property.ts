@@ -1,5 +1,6 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
+import {environment as ENV} from '../../environment';
 
 /*
   Generated class for the PropertyProvider provider.
@@ -7,7 +8,6 @@ import {Injectable} from '@angular/core';
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
 */
-const API_BASE_URL: string = "https://azizidevelopments.com/api";
 
 export interface Area {
     id?: number,
@@ -37,72 +37,72 @@ export class PropertyProvider {
     getProjects() {
 
 
-        return this.http.get(API_BASE_URL + '/dubai', {});
+        return this.http.get(ENV.BASE_URL + '/dubai', {});
     }
 
 
     getPropertyCommunities(area: Area) {
         let slug = area.slug;
-        return this.http.get(API_BASE_URL + '/dubai/' + slug);
+        return this.http.get(ENV.BASE_URL + '/dubai/' + slug);
     }
 
     getProperties(area: Area) {
         let slug = area.slug;
         if (slug == 'riviera' || slug == 'victoria') {
-            return this.http.get(API_BASE_URL + '/dubai/meydan/' + slug);
+            return this.http.get(ENV.BASE_URL + '/dubai/meydan/' + slug);
         }
-        return this.http.get(API_BASE_URL + '/dubai/' + slug);
+        return this.http.get(ENV.BASE_URL + '/dubai/' + slug);
     }
 
     getProperty(property: Property) {
         let area = property.area_slug;
         let slug = property.slug;
-        return this.http.get(API_BASE_URL + '/dubai/' + area + '/' + slug);
+        return this.http.get(ENV.BASE_URL + '/dubai/' + area + '/' + slug);
     }
 
 
     getContrcutionProjects() {
-        return this.http.get(API_BASE_URL + '/dubai/construction-updates');
+        return this.http.get(ENV.BASE_URL + '/dubai/construction-updates');
     }
 
     getConstructionCommunities(area: Area) {
         let slug = area.slug;
-        return this.http.get(API_BASE_URL + '/dubai/' + slug + '/construction-updates');
+        return this.http.get(ENV.BASE_URL + '/dubai/' + slug + '/construction-updates');
     }
 
     getConstructions(area: Area) {
         let slug = area.slug;
         if (slug == 'riviera' || slug == 'victoria') {
-            return this.http.get(API_BASE_URL + '/dubai/meydan/' + slug + '/construction-updates');
+            return this.http.get(ENV.BASE_URL + '/dubai/meydan/' + slug + '/construction-updates');
         }
-        return this.http.get(API_BASE_URL + '/dubai/' + slug + '/construction-updates');
+        return this.http.get(ENV.BASE_URL + '/dubai/' + slug + '/construction-updates');
 
     }
 
     getConstruction(property: Property) {
         let area = property.area_slug;
         let slug = property.slug;
-        return this.http.get(API_BASE_URL + '/dubai/' + area + '/' + slug + '/construction-updates');
+        return this.http.get(ENV.BASE_URL + '/dubai/' + area + '/' + slug + '/construction-updates');
     }
 
     getBrouchures() {
-        return this.http.get(API_BASE_URL + '/properties/brochures');
+        return this.http.get(ENV.BASE_URL + '/properties/brochures');
     }
 
     getFloorplans() {
-        return this.http.get(API_BASE_URL + '/properties/floorplans');
+        return this.http.get(ENV.BASE_URL + '/properties/floorplans');
     }
 
     getVideoGalleries() {
-        return this.http.get(API_BASE_URL + '/videos');
+        return this.http.get(ENV.BASE_URL + '/videos');
     }
 
     getImageGalleries() {
-        return this.http.get(API_BASE_URL + '/image-galleries');
+        return this.http.get(ENV.BASE_URL + '/image-galleries');
     }
 
     getEvents() {
-        return this.http.get(API_BASE_URL + '/events');
+        return this.http.get(ENV.BASE_URL + '/events');
     }
 
 }

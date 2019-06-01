@@ -6,10 +6,10 @@
         <ion-title>Home</ion-title>
         <ion-buttons end>
             <button ion-button (click)="openHomePage()">
-                    <ion-icon name="home"></ion-icon>
+                <ion-icon name="home"></ion-icon>
             </button>
             <button ion-button (click)="openMorePage()">
-                    <ion-icon name="more"></ion-icon>
+                <ion-icon name="more"></ion-icon>
             </button>
         </ion-buttons>
     </ion-navbar>
@@ -17,9 +17,10 @@
 
 <ion-content class="card-background-page">
     <ion-row>
-        <ion-col col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 *ngFor="let area of areas" >
+        <ion-col col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 *ngFor="let area of areas">
             <ion-card (click)="area.community_id?openCommunityPage(area):openPropertiesPage(area)">
-                <img [src]="area.image">
+                <img [src]="area.image" alt="{{area.name}}" />
+               <!-- <ionic-image-cache [src]="area.image" [highResSrc]="area.image" alt="{{area.name}}"></ionic-image-cache>-->
                 <div class="card-background">
                     <div class="card-title">{{area.name}}</div>
                     <div class="card-subtitle">Dubai, UAE</div>

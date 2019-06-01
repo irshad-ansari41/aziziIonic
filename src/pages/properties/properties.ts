@@ -6,7 +6,7 @@ import {PropertyPage} from '../property/property';
 import {HomePage} from '../home/home';
 import {MorePage} from '../more/more';
 
-import {Constants} from '../../enum';
+import {environment as ENV} from '../../environment';
 
 /**
  * Generated class for the PropertiesPage page.
@@ -50,7 +50,7 @@ export class PropertiesPage {
 
     getProperties(area:Area) {
         let allPropertiesLoadingController = this.loadingController.create({
-            content: Constants.LoadingMsg
+            content: ENV.LoadingMsg
         });
         allPropertiesLoadingController.present();
 

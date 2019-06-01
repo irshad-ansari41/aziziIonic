@@ -5,7 +5,7 @@ import {SocialSharing} from '@ionic-native/social-sharing';
 
 import {HomePage} from '../home/home';
 import {ContactPage} from '../contact/contact';
-//import {Constants} from '../../enum';
+//import {environment as ENV} from '../../environment';
 
 /**
  * Generated class for the MorePage page.

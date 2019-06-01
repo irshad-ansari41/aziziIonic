@@ -39,7 +39,7 @@ import {InAppBrowser} from '@ionic-native/in-app-browser';
 import {NativeStorage} from '@ionic-native/native-storage';
 import {IonicStorageModule} from '@ionic/storage';
 import {SocialSharing} from '@ionic-native/social-sharing';
-
+import {IonicImageCacheModule} from 'ionic3-image-cache';
 
 import {PipesModule} from '../pipes/pipes.module';
 import {AuthProvider} from '../providers/auth/auth';
@@ -58,6 +58,7 @@ import {LeadProvider} from '../providers/lead/lead';
         IonicSelectableModule,
         IonicModule.forRoot(MyApp),
         IonicStorageModule.forRoot(),
+        IonicImageCacheModule.forRoot(),
         ionicGalleryModal.GalleryModalModule,
         PipesModule,
         PropertiesPageModule,
