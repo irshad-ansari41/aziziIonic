@@ -5,7 +5,7 @@ import {SocialSharing} from '@ionic-native/social-sharing';
 
 import {HomePage} from '../home/home';
 import {ContactPage} from '../contact/contact';
-//import {environment as ENV} from '../../environment';
+import {environment as ENV} from '../../environment';
 
 /**
  * Generated class for the MorePage page.
@@ -24,7 +24,7 @@ export class MorePage {
     public store: string;
     public storeUrl: string;
 
-    public appVesrion = '1.0.0';
+    public appVesrion = ENV.APP_VERSION;
 
     constructor(public navCtrl: NavController,
         public navParams: NavParams,
@@ -153,7 +153,7 @@ export class MorePage {
                 {
                     text: 'Yes',
                     handler: () => {
-                        let browser = this.iab.create("http://azizidevelopments.in/azizidevelopments/");
+                        let browser = this.iab.create("https://azizidevelopments.com/app");
                         browser.close();
                     }
                 }

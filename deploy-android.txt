@@ -1,5 +1,5 @@
 
-cd /Users/irshad.ansari/Applications/aziziIonic
+cd /Users/irshad-ansari/Applications/aziziIonic
 
 cordova prepare
 
@@ -7,13 +7,14 @@ export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
 
 cordova build --release android
 
-cd /Users/irshad.ansari/applications/aziziIonic/platforms/android/app/build/outputs/apk/release
+cd /Users/irshad-ansari/applications/aziziIonic/platforms/android/app/build/outputs/apk/release
 
 rm azizidevelopments.apk
 
 jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore AZIZI-release-key.keystore app-release-unsigned.apk AziziDevelopmentsApp
 
-/Users/irshad.ansari/Library/Android/sdk/build-tools/27.0.3/zipalign -v 4 app-release-unsigned.apk azizidevelopments.apk
+/Users/irshad-ansari/Library/Android/sdk/build-tools/29.0.0/zipalign -v 4 app-release-unsigned.apk azizidevelopments.apk
+
 
 cordova platform list
 

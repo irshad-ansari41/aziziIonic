@@ -5,7 +5,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import { Lead } from '../../class/lead';
 import { Contact } from '../../class/contact';
-import {environment as ENV} from '../../environment';
+import { environment as ENV } from '../../environment';
 
 /*
   Generated class for the LeadProvider provider.
@@ -60,7 +60,7 @@ export class LeadProvider {
   }
 
   getAges() {
-    return this.httpClient.get('../assets/data/ages.json');
+    return this.httpClient.get(ENV.BASE_URL + '/get-ages');
   }
 
 }

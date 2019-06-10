@@ -4,3 +4,9 @@ cordova prepare
 
 open /Users/irshad.ansari/Applications/aziziIonic/platforms/ios/Azizi-Developments.xcworkspace
 
+
+cordova platform list
+
+cordova platform rm ios
+
+cordova platform add ios
